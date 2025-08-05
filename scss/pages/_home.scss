@@ -1,0 +1,122 @@
+.banner-home {
+  background: linear-gradient(
+    180deg,
+    var(--colors-primary-500, #e08022) 0%,
+    var(--colors-tertiary-500, #de2e0d) 100%
+  );
+  position: absolute;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+
+  &:before {
+    content: url("../../images/Asset-chamas.svg");
+    position: absolute;
+    right: 150px;
+  }
+
+  .banner-swiper {
+    margin-top: 180px;
+
+    .swiper-slide {
+      display: flex;
+      gap: 32px;
+      justify-content: space-between;
+      align-items: center;
+
+      .text-slide {
+        width: 520px;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        margin-left: 35vh;
+        justify-content: center;
+
+        h2 {
+          margin: 0;
+          padding: 0;
+          color: #fcfcfc;
+          font-family: "Poppins";
+          font-size: 56px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 116%;
+          display: flex;
+          flex-direction: column;
+
+          &:after {
+            content: url(../../images/border-title.svg);
+            top: 103px;
+            position: absolute;
+          }
+
+          strong {
+            font-weight: 700;
+          }
+        }
+
+        span {
+          color: #fcfcfc;
+          font-family: "Arial";
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 140%;
+        }
+
+        a {
+          width: fit-content;
+          text-decoration: none;
+          display: flex;
+          padding: 16px 24px;
+          align-items: center;
+          gap: 16px;
+          border-radius: 8px;
+          background: #f7f7f7;
+
+          color: #6e6e6e;
+          font-family: "Poppins";
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 116%;
+        }
+      }
+
+      .video-slide {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+
+        video {
+          border-radius: 16px 0 0 16px;
+          height: 600px;
+          max-width: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+
+    .banner-pagination {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 32px;
+      border: 1px solid red;
+
+      button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+      }
+
+      .banner-prev {
+        img {
+          rotate: 180deg;
+        }
+      }
+    }
+  }
+}

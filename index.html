@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html class="no-js" lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IMC - Relações com Investidores</title>
+    <meta
+      name="description"
+      content="A Companhia é uma das maiores empresas do varejo de alimentação com origem e atuação no Brasil e Estados Unidos. Atualmente, o grupo emprega globalmente mais de 12.000 colaboradores em operações distintas, como shoppings, centros comerciais, rodovias, hospitais, aeroportos e catering."
+    />
+    <meta
+      property="og:title"
+      content="IMC - Relações com Investidores - MEAL3"
+    />
+    <meta
+      property="og:description"
+      content="A Companhia é uma das maiores empresas do varejo de alimentação com origem e atuação no Brasil e Estados Unidos. Atualmente, o grupo emprega globalmente mais de 12.000 colaboradores em operações distintas, como shoppings, centros comerciais, rodovias, hospitais, aeroportos e catering."
+    />
+    <meta property="og:image" content="./images/thumb-projeto.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="627" />
+
+    <!-- <link rel="icon" type="image/x-icon" href="./images/logotipo-imc.png" /> -->
+
+    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="css/import.dist.min.css" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- GSAP (GreenSock animation) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Lottie - Animações Vetoriais -->
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+    <!-- Framer Motion (via CDN) -->
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+
+    <!-- Swiper CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="acessibility-bar">
+      <div class="container container-full">
+        <div class="content-acessibility">
+          <div class="link-ri">
+            <a href="#" target="_blank">Relações com Investidores</a>
+          </div>
+
+          <div class="tickers-bar">
+            <div class="swiper tickers-swiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <span class="ticker-item">
+                    <span class="ticker-symbol">MEAL3</span>
+                    <span class="ticker-value">R$ 1,14</span>
+                    <span class="ticker-variation">0.88 %</span>
+                  </span>
+                </div>
+                <div class="swiper-slide">
+                  <span class="ticker-item">
+                    <span class="ticker-symbol">IBOV</span>
+                    <span class="ticker-value">R$ 139.622</span>
+                    <span class="ticker-variation">1,76 %</span>
+                  </span>
+                </div>
+                <div class="swiper-slide">
+                  <span class="ticker-item">
+                    <span class="ticker-symbol">MEAL3</span>
+                    <span class="ticker-value">R$ 1,14</span>
+                    <span class="ticker-variation">-0.88 %</span>
+                  </span>
+                </div>
+                <div class="swiper-slide">
+                  <span class="ticker-item">
+                    <span class="ticker-symbol">IBOV</span>
+                    <span class="ticker-value">R$ 139.622</span>
+                    <span class="ticker-variation">1,76 %</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accessibility-tools">
+            <div class="tools">
+              <p>Acessibilidade</p>
+
+              <a href="#" class="toggle-mode">
+                <img
+                  src="./images/icon-acessibilidade.svg"
+                  alt="Acessibilidade"
+                />
+              </a>
+
+              <a href="#" class="increase-font">
+                <img
+                  src="./images/icon-increase-font.svg"
+                  alt="Aumentar fonte"
+                />
+              </a>
+
+              <a href="#" class="decrease-font">
+                <img
+                  src="./images/icon-redduce-font.svg"
+                  alt="Diminuir fonte"
+                />
+              </a>
+            </div>
+
+            <div class="language-tools">
+              <div class="language-dropdown">
+                <button class="language-toggle" type="button">
+                  <span class="current-lang">PT</span>
+                  <img src="./images/arrow-language.svg" alt="Arrow language" />
+                </button>
+                <ul class="language-menu">
+                  <li><a href="#" data-lang="pt" class="active">PT</a></li>
+                  <li><a href="#" data-lang="en">EN</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <header>
+      <div class="container container-full">
+        <div class="content-header">
+          <div class="logo">
+            <img src="images/logotipo-imc.png" alt="Logo IMC" />
+          </div>
+
+          <nav class="navigation">
+            <div class="menu-items">
+              <div class="dropdown">
+                <button
+                  class="dropdown-toggle"
+                  type="button"
+                  id="dropdownMenu-1"
+                  aria-expanded="false"
+                  data-bs-toggle="dropdown"
+                >
+                  <p>Grupo IMC</p>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu-1">
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">Quem Somos</a>
+                  </li>
+
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">Nossa Estratégia</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="menu-items">
+              <div class="dropdown">
+                <button
+                  class="dropdown-toggle"
+                  type="button"
+                  id="dropdownMenu-2"
+                  aria-expanded="false"
+                  data-bs-toggle="dropdown"
+                >
+                  <p>Marcas IMC</p>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu-2">
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">Nossas Marcas</a>
+                  </li>
+
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">Frango Assado</a>
+                  </li>
+
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">Margaritaville</a>
+                  </li>
+
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">Viena</a>
+                  </li>
+
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">Pizza Hut</a>
+                  </li>
+
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">RA Cathering</a>
+                  </li>
+
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">Batata Inglesa</a>
+                  </li>
+
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">Brunella</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="menu-items">
+              <div class="dropdown">
+                <button
+                  class="dropdown-toggle"
+                  type="button"
+                  id="dropdownMenu-3"
+                  aria-expanded="false"
+                  data-bs-toggle="dropdown"
+                >
+                  <p>Governança</p>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu-3">
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">Composição Acionária</a>
+                  </li>
+
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">Diretoria e Conselho</a>
+                  </li>
+
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href=""
+                      >Estatutos, Regimentos e Políticas</a
+                    >
+                  </li>
+
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href=""
+                      >Atas de Reunião e Assembleia</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="menu-items">
+              <div class="dropdown">
+                <button
+                  class="dropdown-toggle"
+                  type="button"
+                  id="dropdownMenu-3"
+                  aria-expanded="false"
+                  data-bs-toggle="dropdown"
+                >
+                  <p>Informações Financeiras</p>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu-3">
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">Central de Resultados</a>
+                  </li>
+
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">Planilhas e Fundamentos</a>
+                  </li>
+
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href=""
+                      >Avisos, Comunidados e Fatos Relevantes</a
+                    >
+                  </li>
+
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href=""
+                      >Documentos entregues à CVM</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="menu-items">
+              <div class="dropdown">
+                <button
+                  class="dropdown-toggle"
+                  type="button"
+                  id="dropdownMenu-4"
+                  aria-expanded="false"
+                  data-bs-toggle="dropdown"
+                >
+                  <p>Serviços RI</p>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu-4">
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">Calendário de Eventos</a>
+                  </li>
+
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">Cobertura de Analistas</a>
+                  </li>
+
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">Cotações e Gráficos</a>
+                  </li>
+
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">Central de Downloads</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="menu-items">
+              <div class="dropdown">
+                <button
+                  class="dropdown-toggle"
+                  type="button"
+                  id="dropdownMenu-4"
+                  aria-expanded="false"
+                  data-bs-toggle="dropdown"
+                >
+                  <p>Contato</p>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu-4">
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">Canais de Atendimento</a>
+                  </li>
+
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">Cadastre-se no Mailing</a>
+                  </li>
+
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href=""
+                      >Assessoria de Comunicação</a
+                    >
+                  </li>
+
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">Glossário</a>
+                  </li>
+
+                  <li class="dropdown-page">
+                    <a class="dropdown-item" href="">Vem ser IMC</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+
+          <div class="search-bar">
+            <a href="#">
+              <img src="./images/icon_search.svg" alt="Search" />
+            </a>
+
+            <div id="searchBox">
+              <div class="container container-full">
+                <div class="wrapper">
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      class="form-control inputBusca"
+                      placeholder="Digite aqui a sua busca"
+                    />
+
+                    <div class="input-group-append">
+                      <button
+                        type="button"
+                        class="input-group-text close-search-box"
+                        role="button"
+                      >
+                        <img
+                          src="./images/icon-close.svg"
+                          alt="Close"
+                          title="Fechar Caixa de Pesquisa"
+                        />
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="search-help">
+                    <small> Aperte Enter para pesquisar </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="banner-home">
+      <div class="swiper banner-swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="text-slide">
+              <h2>Restaurante bom <strong>tem dono</strong></h2>
+
+              <span>Quem somos</span>
+
+              <a href="#" target="_blank"> Quero conhecer </a>
+            </div>
+
+            <div class="video-slide">
+              <video src="videos/frango-assado.mp4" autoplay muted loop></video>
+            </div>
+          </div>
+
+          <div class="swiper-slide">
+            <div class="text-slide">
+              <h2>Restaurante bom <strong>tem dono</strong></h2>
+
+              <span>Quem somos</span>
+
+              <a href="#" target="_blank"> Quero conhecer </a>
+            </div>
+
+            <div class="video-slide">
+              <video src="videos/frango-assado.mp4" autoplay muted loop></video>
+            </div>
+          </div>
+        </div>
+
+        <div class="banner-pagination">
+          <button class="banner-prev">
+            <img src="/images/arrow-slides.svg" alt="Arrow slide" />
+          </button>
+          <div class="banner-counter">
+            <span class="current-slide"></span>
+            <span class="separator">/</span>
+            <span class="total-slides"></span>
+          </div>
+          <button class="banner-next">
+            <img src="/images/arrow-slides.svg" alt="Arrow slide" />
+          </button>
+        </div>
+      </div>
+
+      <div class="destaques-home">
+        <div class="container container-full">
+          
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <script src="js/main.js"></script>
+    <script src="js/swiper.js"></script>
+  </body>
+</html>
