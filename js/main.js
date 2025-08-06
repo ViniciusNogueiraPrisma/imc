@@ -96,3 +96,29 @@ $(document).ready(function () {
     }
   });
 });
+
+const header = document.querySelector("header");
+let lastScrollTop = 0;
+
+function handleScroll() {
+  const currentScroll = window.scrollY;
+
+  if (currentScroll === 0) {
+    header.classList.remove("hide-header", "show-header");
+    header.classList.add("at-top");
+  } else {
+    header.classList.remove("at-top");
+
+    if (currentScroll > lastScrollTop) {
+      header.classList.remove("show-header");
+      header.classList.add("hide-header");
+    } else {
+      header.classList.remove("hide-header");
+      header.classList.add("show-header");
+    }
+  }
+
+  lastScrollTop = currentScroll;
+}
+
+window.addEventListener("scroll", handleScroll);

@@ -18,37 +18,55 @@ $(document).ready(function () {
       },
     },
   });
-});
 
-const bannerSwiper = new Swiper(".banner-swiper", {
-  slidesPerView: 1,
-  // loop: true,
-  // autoplay: {
-  //   delay: 3000,
-  //   disableOnInteraction: false,
-  // },
-  navigation: {
-    nextEl: ".banner-next",
-    prevEl: ".banner-prev",
-  },
-  on: {
-    init: function () {
-      setTimeout(updateBannerCounter, 100);
+  const bannerSwiper = new Swiper(".banner-swiper", {
+    slidesPerView: 1,
+    // loop: true,
+    // autoplay: {
+    //   delay: 3000,
+    //   disableOnInteraction: false,
+    // },
+    effect: "fade",
+    fadeEffect: {
+      crossFade: true,
     },
-    slideChange: function () {
-      updateBannerCounter();
+    allowTouchMove: true,
+    pagination: {
+      el: ".swiper-pagination",
+      type: "fraction",
     },
-  },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+
+  const swiperParceiros = new Swiper(".mySwiper-parceiros", {
+    slidesPerView: 5,
+    centeredSlides: true,
+    loop: true,
+    spaceBetween: 16,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    on: {
+      slideChangeTransitionEnd: function () {
+        $(".mySwiper-parceiros .swiper-slide a").removeClass("slide-active");
+
+        const activeSlide = $(".mySwiper-parceiros .swiper-slide-active");
+        if (activeSlide.length) {
+          activeSlide.find("a").addClass("slide-active");
+        }
+      },
+      init: function () {
+        setTimeout(() => {
+          const activeSlide = $(".mySwiper-parceiros .swiper-slide-active");
+          if (activeSlide.length) {
+            activeSlide.find("a").addClass("slide-active");
+          }
+        }, 100);
+      },
+    },
+  });
 });
-
-function updateBannerCounter() {
-  const currentSlide = bannerSwiper.realIndex + 1;
-  const totalSlides = bannerSwiper.slides.length - (bannerSwiper.loop ? 2 : 0);
-
-  document.querySelector(".current-slide").textContent = currentSlide
-    .toString()
-    .padStart(2, "0");
-  document.querySelector(".total-slides").textContent = totalSlides
-    .toString()
-    .padStart(2, "0");
-}
