@@ -108,7 +108,7 @@
 
         span {
           color: #fcfcfc;
-          font-family: "Arial";
+          font-family: "Arimo";
           font-size: 18px;
           font-style: normal;
           font-weight: 400;
@@ -207,7 +207,7 @@
 
         .swiper-pagination-current {
           color: #f7f7f7;
-          font-family: "Arial";
+          font-family: "Arimo";
           font-size: 18px;
           font-style: normal;
           font-weight: 700;
@@ -216,7 +216,7 @@
 
         .swiper-pagination-total {
           color: #f7f7f7;
-          font-family: "Arial";
+          font-family: "Arimo";
           font-size: 18px;
           font-style: normal;
           font-weight: 400;
@@ -231,11 +231,27 @@
     position: relative;
     z-index: 100;
 
+    .swiper-pagination {
+      position: relative;
+      margin-top: 24px;
+
+      @media (min-width: 1200px) {
+        display: none;
+      }
+    }
+
     .container {
       .destaques-content {
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        gap: 32px;
+        @media (min-width: 1200px) {
+          display: grid !important;
+          grid-template-columns: repeat(6, 1fr);
+          gap: 32px;
+          transform: none !important;
+        }
+
+        .swiper-slide {
+          height: auto;
+        }
 
         a {
           text-decoration: none;
@@ -244,7 +260,7 @@
           align-items: center;
           justify-content: center;
           transition: all 0.3s ease;
-
+          height: 100%;
           gap: 8px;
           padding: 14px;
           border-radius: 8px;
@@ -283,24 +299,25 @@
   }
 
   .swiper-slide {
-    transform: scale(0.8) !important;
+    transform: scale(0.75) !important;
     transition: all 0.3s ease;
     border-radius: 8px;
     border: 1px solid #f2f2f2;
     opacity: 0.32;
     background: #fcfcfc;
     padding: 24px;
-
     text-align: center;
+    overflow: hidden;
 
     img {
       filter: grayscale(1);
+      transition: all 0.3s ease;
     }
 
     a {
       text-decoration: none;
       color: #3b3b3b;
-      font-family: "Arial";
+      font-family: "Arimo";
       font-size: 14px;
       font-style: normal;
       font-weight: 400;
@@ -311,6 +328,8 @@
       align-items: center;
       gap: 0px;
       margin-top: 16px;
+      transform: translateY(100%);
+      opacity: 0;
 
       &:before {
         content: "";
@@ -334,9 +353,21 @@
         left: 100%;
         transform: translate(-10px, -50%);
       }
+    }
 
-      &:hover,
-      &.slide-active {
+    &:hover {
+      transform: scale(0.9) !important;
+      opacity: 1;
+      transition: all 0.3s ease;
+
+      img {
+        filter: unset;
+        transition: all 0.3s ease;
+      }
+
+      a {
+        transform: translateY(0);
+        opacity: 1;
         transition: all 0.3s ease;
         color: #ea7425;
         gap: 8px;
@@ -356,7 +387,7 @@
   .swiper-slide-active {
     opacity: 1;
     transition: all 0.3s ease;
-    transform: scale(1) !important;
+    transform: scale(1.1) !important;
     padding: 16px;
     border-radius: 8px;
     background: #f7f7f7;
@@ -364,13 +395,33 @@
     img {
       filter: unset;
     }
+
+          a {
+        transform: translateY(0);
+        opacity: 1;
+        color: #ea7425;
+        gap: 8px;
+
+        &:before {
+          width: 119%;
+        }
+
+        &:after {
+          opacity: 1;
+          transform: translate(0, -50%);
+        }
+      }
+
+      &:hover {
+        transform: scale(1.15) !important;
+      }
   }
 
   .btns-parceiros {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 16px;
+    gap: 24px;
 
     .trade-parceiros {
       cursor: pointer;
@@ -477,7 +528,7 @@
               margin: 0;
               padding: 0;
               color: #6e6e6e;
-              font-family: "Arial";
+              font-family: "Arimo";
               font-size: 14px;
               font-style: normal;
               font-weight: 400;
@@ -512,7 +563,7 @@
                 margin: 0;
                 padding: 0;
                 color: #3b3b3b;
-                font-family: "Arial";
+                font-family: "Arimo";
                 font-size: 16px;
                 font-style: normal;
                 font-weight: 400;
@@ -524,7 +575,7 @@
                 margin: 0;
                 padding: 0;
                 color: #eb923b;
-                font-family: "Arial";
+                font-family: "Arimo";
                 font-size: 14px;
                 font-style: normal;
                 font-weight: 400;
@@ -549,7 +600,7 @@
   margin-top: 32px;
   color: #eb923b;
 
-  font-family: "Arial";
+  font-family: "Arimo";
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -564,7 +615,7 @@
 .channels-home {
   position: relative;
   z-index: 2;
-  
+
   .main-content-channels {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -609,7 +660,7 @@
         margin-bottom: 32px;
 
         color: #fcfcfc;
-        font-family: "Arial";
+        font-family: "Arimo";
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
@@ -628,6 +679,13 @@
         font-style: normal;
         font-weight: 700;
         line-height: 116%;
+        transition: all 0.4s ease;
+
+        &:hover {
+          transition: all 0.4s ease;
+          background: #e0e0e0;
+          color: #6e6e6e;
+        }
       }
     }
 
