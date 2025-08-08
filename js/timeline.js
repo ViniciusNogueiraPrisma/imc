@@ -42,42 +42,62 @@ document.addEventListener('DOMContentLoaded', function() {
     points.forEach((point, index) => {
       point.addEventListener('click', () => {
         const slideIndex = parseInt(point.dataset.index);
+        const slideYear = point.dataset.year;
+        
         if (!isNaN(slideIndex) && slideIndex >= 0 && slideIndex < swiper.slides.length) {
           swiper.slideTo(slideIndex);
+          
+          // Log para debug da ligação entre slide e ano
+          console.log(`Navegando para slide ${slideIndex} (${slideYear})`);
         }
       });
-
-      // O hover agora é controlado apenas pelo CSS
     });
 
-    // Inicializa o estado
+    // Inicializa o estado com o primeiro slide ativo
     updateTimeline(swiper);
+    
+    // Garante que a barra de progresso comece no primeiro ponto
+    setTimeout(() => {
+      updateTimeline(swiper);
+    }, 100);
   }
 
   function updateTimeline(swiper) {
     const totalSlides = swiper.slides.length;
     const currentIndex = swiper.activeIndex;
+    const currentSlide = swiper.slides[currentIndex];
+    const currentYear = currentSlide ? currentSlide.dataset.year : null;
     
     const progressBar = document.querySelector('.track-progress');
     const points = document.querySelectorAll('.point-wrapper');
     const trackPoints = document.querySelector('.track-points');
+    const timelineTrack = document.querySelector('.timeline-track');
     
-    // Calcula o progresso considerando o padding dos pontos
-    if (progressBar && trackPoints && totalSlides > 1) {
-      const trackWidth = trackPoints.offsetWidth;
-      // Verifica se está em modo responsivo
-      const isMobile = window.innerWidth <= 768;
-      const paddingLeft = isMobile ? 20 : 40; // padding definido no CSS
-      const availableWidth = trackWidth - (paddingLeft * 2);
-      const pointSpacing = availableWidth / (totalSlides - 1);
-      const currentPosition = paddingLeft + (pointSpacing * currentIndex);
-      const progressWidth = (currentPosition - paddingLeft) / availableWidth * 100;
+    // Log para debug
+    console.log(`Timeline Update: Slide ${currentIndex}, Year ${currentYear}`);
+    
+    // Calcula a barra de progresso baseada na posição real dos pontos
+    if (progressBar && points.length > 1) {
+      const activePoint = document.querySelector(`.point-wrapper[data-year="${currentYear}"]`);
+      const firstPoint = points[0];
       
-      progressBar.style.width = `${Math.max(0, Math.min(100, progressWidth))}%`;
+      if (activePoint && firstPoint) {
+        // Espaçamento fixo: 80px por ponto + 40px de margem = 120px entre centros dos pontos
+        const pointSpacing = 120; // 80px width + 40px margin
+        // A barra começa no centro do primeiro ponto (40px padding + 40px para o centro = 80px)
+        // Mas agora a barra está posicionada em left: 40px, então adicionamos 40px ao cálculo
+        const progressWidth = 40 + (currentIndex * pointSpacing);
+        
+        progressBar.style.width = `${progressWidth}px`;
+      }
+    } else if (progressBar && points.length === 1) {
+      // Se só há um ponto, não mostra barra
+      progressBar.style.width = '0px';
     }
     
-    // Atualiza estados dos pontos
+    // Atualiza estados dos pontos baseado no ano
     points.forEach((point) => {
+      const pointYear = point.dataset.year;
       const pointIndex = parseInt(point.dataset.index);
       
       // Remove todas as classes de estado
@@ -86,14 +106,50 @@ document.addEventListener('DOMContentLoaded', function() {
       if (pointIndex < currentIndex) {
         // Estados passados
         point.classList.add('passed');
-      } else if (pointIndex === currentIndex) {
-        // Estado ativo
+      } else if (pointYear === currentYear) {
+        // Estado ativo baseado no ano
         point.classList.add('active');
+        
+        // Scroll automático para o ponto ativo
+        scrollToActivePoint(point);
       }
     });
 
     // Atualiza state dos botões
     updateNavigationButtons(swiper);
+  }
+
+  function scrollToActivePoint(activePoint) {
+    const timelineTrack = document.querySelector('.timeline-track');
+    if (!timelineTrack || !activePoint) return;
+    
+    const trackRect = timelineTrack.getBoundingClientRect();
+    const pointRect = activePoint.getBoundingClientRect();
+    const scrollLeft = timelineTrack.scrollLeft;
+    
+    // Calcula a posição para manter o ponto ativo visível
+    const pointLeft = pointRect.left - trackRect.left + scrollLeft;
+    const pointRight = pointLeft + pointRect.width;
+    const trackWidth = trackRect.width;
+    
+    let targetScroll = scrollLeft;
+    
+    // Se o ponto está fora da view à direita
+    if (pointRight > trackWidth + scrollLeft) {
+      targetScroll = pointRight - trackWidth + 40; // +40px de margem
+    }
+    // Se o ponto está fora da view à esquerda
+    else if (pointLeft < scrollLeft) {
+      targetScroll = Math.max(0, pointLeft - 40); // -40px de margem
+    }
+    
+    // Scroll suave
+    if (targetScroll !== scrollLeft) {
+      timelineTrack.scrollTo({
+        left: targetScroll,
+        behavior: 'smooth'
+      });
+    }
   }
 
   function updateNavigationButtons(swiper) {

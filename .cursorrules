@@ -1,0 +1,44 @@
+# Figma Dev Mode MCP Rules para projeto IMC
+
+## Regras gerais
+
+- Use os design tokens do Figma quando disponíveis
+- Mantenha fidelidade total aos designs do Figma
+- Prefira SCSS sobre CSS inline
+- Use a estrutura de arquivos existente do projeto
+
+## Estrutura de arquivos
+
+- Componentes: `scss/components/`
+- Páginas: `scss/pages/`
+- Variáveis: `scss/main/_variables.scss`
+- Imagens: `images/`
+
+## Convenções do projeto IMC
+
+- Use `cubic-bezier(0.25, 0.1, 0.25, 1)` para transições suaves
+- Cores laranja: `#ea7425`, `#e08022`
+- Overlays: gradients com rgba para transparência
+- Z-index: texto sempre acima de overlays
+- Font-family: "Poppins" para títulos, "Arimo" para textos
+
+## Assets e imagens
+
+- IMPORTANTE: Use as imagens do Figma via localhost quando fornecidas
+- NÃO importe pacotes de ícones externos
+- NÃO crie placeholders se source localhost disponível
+- Mantenha assets na pasta `images/`
+
+## Animações e transições
+
+- Use `transition: all 0.3s ease` ou timing customizado
+- Hover effects: `transform: translateY()` para movimento
+- Overlays: `opacity` transitions para suavidade
+- Text-shadow para legibilidade sobre imagens
+
+## Componentes específicos IMC
+
+- Cards com overlay laranja no hover
+- Textos que sobem no hover com font-weight aumentado
+- Imagens que expandem para altura total
+- Background transparente em hover states

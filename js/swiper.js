@@ -106,4 +106,26 @@ $(document).ready(function () {
       },
     },
   });
+
+  // Carrossel de Marcas com fade effect
+  const marcasSwiper = new Swiper(".marcas-swiper", {
+    effect: "fade",
+    fadeEffect: {
+      crossFade: true
+    },
+    speed: 1000,
+    loop: true,
+    autoplay: {
+      delay: 6000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: ".marcas-destaque .swiper-pagination",
+      type: "fraction",
+    },
+    navigation: {
+      nextEl: ".marcas-destaque .swiper-button-next",
+      prevEl: ".marcas-destaque .swiper-button-prev",
+    }
+  });
 });
