@@ -107,13 +107,12 @@ $(document).ready(function () {
     },
   });
 
-  // Carrossel de Marcas com fade effect
   const marcasSwiper = new Swiper(".marcas-swiper", {
     effect: "fade",
     fadeEffect: {
       crossFade: true
     },
-    speed: 1000,
+    speed: 800,
     loop: true,
     autoplay: {
       delay: 6000,
