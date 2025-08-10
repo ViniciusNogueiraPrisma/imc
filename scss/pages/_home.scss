@@ -548,7 +548,6 @@
             align-items: center;
             justify-content: space-between;
             gap: 12px;
-            // flex-wrap: wrap;
 
             .texts {
               display: flex;
@@ -588,6 +587,11 @@
                 transition: all 0.5s ease;
                 pointer-events: none;
               }
+            }
+
+            .extern-links {
+              display: flex;
+              gap: 8px;
             }
           }
         }

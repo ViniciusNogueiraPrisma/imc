@@ -1,4 +1,3 @@
-// dropdown idiomas
 document.addEventListener("DOMContentLoaded", function () {
   const languageToggle = document.querySelector(".language-toggle");
   const languageMenu = document.querySelector(".language-menu");
@@ -60,7 +59,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// dropdown header active
 $(document).ready(function () {
   $(".dropdown").hover(
     function () {
@@ -73,7 +71,6 @@ $(document).ready(function () {
     }
   );
 
-  // abrir searchbox
   const searchButton = $(".search-bar a");
   const searchBox = $("#searchBox");
   const closeSearchBox = $(".close-search-box");
@@ -97,10 +94,141 @@ $(document).ready(function () {
   });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  const glossarioContainer = document.querySelector(".container-glossario");
+  if (!glossarioContainer) return;
+
+  const letterLinks = document.querySelectorAll(".letter-link");
+  const glossarioSections = document.querySelectorAll(".glossario-section");
+
+  if (letterLinks.length === 0 || glossarioSections.length === 0) return;
+
+  const availableLetters = new Set();
+  glossarioSections.forEach((section) => {
+    const letter = section.getAttribute("data-letter");
+    if (letter) {
+      availableLetters.add(letter);
+    }
+  });
+
+  letterLinks.forEach((link) => {
+    const letter = link.getAttribute("data-letter");
+    if (!availableLetters.has(letter)) {
+      link.classList.add("disabled");
+      link.style.pointerEvents = "none";
+    }
+  });
+
+  console.log(
+    "Letras disponíveis no glossário:",
+    Array.from(availableLetters).sort()
+  );
+
+  const observerOptions = {
+    root: null,
+    rootMargin: "-120px 0px -50% 0px",
+    threshold: 0.1,
+  };
+
+  function activateLetter(letter) {
+    letterLinks.forEach((link) => {
+      if (!link.classList.contains("disabled")) {
+        link.classList.remove("active");
+      }
+    });
+
+    const currentLink = document.querySelector(`[data-letter="${letter}"]`);
+    if (currentLink && !currentLink.classList.contains("disabled")) {
+      currentLink.classList.add("active");
+    }
+  }
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const letter = entry.target.getAttribute("data-letter");
+        if (letter) {
+          activateLetter(letter);
+        }
+      }
+    });
+  }, observerOptions);
+
+  glossarioSections.forEach((section) => {
+    sectionObserver.observe(section);
+  });
+
+  letterLinks.forEach((link) => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      if (this.classList.contains("disabled")) {
+        return;
+      }
+
+      const letter = this.getAttribute("data-letter");
+      const targetSection = document.querySelector(
+        `#letter-${letter.toLowerCase()}`
+      );
+
+      if (targetSection) {
+        const headerHeight = document.querySelector(
+          ".glossario-alphabet-header"
+        ).offsetHeight;
+        const targetPosition = targetSection.offsetTop - headerHeight - 20;
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth",
+        });
+
+        activateLetter(letter);
+      }
+    });
+  });
+
+  function checkInitialPosition() {
+    const scrollTop = window.pageYOffset;
+    const headerHeight = document.querySelector(
+      ".glossario-alphabet-header"
+    ).offsetHeight;
+
+    for (let i = 0; i < glossarioSections.length; i++) {
+      const section = glossarioSections[i];
+      const sectionTop = section.offsetTop - headerHeight - 50;
+      const sectionBottom = sectionTop + section.offsetHeight;
+
+      if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
+        const letter = section.getAttribute("data-letter");
+        activateLetter(letter);
+        break;
+      }
+    }
+  }
+
+  setTimeout(checkInitialPosition, 100);
+});
+
 const header = document.querySelector("header");
 let lastScrollTop = 0;
 
+function isGlossarioPage() {
+  const currentUrl = window.location.href;
+  const pathname = window.location.pathname;
+
+  return (
+    currentUrl.includes("glossario.html") ||
+    pathname.includes("glossario.html") ||
+    pathname.endsWith("/glossario") ||
+    pathname.endsWith("/glossario/")
+  );
+}
+
 function handleScroll() {
+  if (isGlossarioPage()) {
+    return;
+  }
+
   const currentScroll = window.scrollY;
 
   if (currentScroll === 0) {
@@ -121,172 +249,161 @@ function handleScroll() {
   lastScrollTop = currentScroll;
 }
 
-window.addEventListener("scroll", handleScroll);
+if (!isGlossarioPage()) {
+  window.addEventListener("scroll", handleScroll);
+  console.log("Header scroll habilitado (página não é glossário)");
+} else {
+  console.log("Header scroll desabilitado (página do glossário detectada)");
 
-// Filter Component Functionality com Animações
+  if (header) {
+    header.classList.add("at-top");
+    header.classList.remove("hide-header", "show-header");
+    header.style.position = "absolute";
+  }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
-  const filterButton = document.querySelector('[data-filter-toggle]');
-  const filterOptions = document.querySelector('[data-filter-options]');
-  const filterItems = document.querySelectorAll('[data-filter-item]');
-  const filterSelects = document.querySelectorAll('.filter-select select');
-  
+  const filterButton = document.querySelector("[data-filter-toggle]");
+  const filterOptions = document.querySelector("[data-filter-options]");
+  const filterItems = document.querySelectorAll("[data-filter-item]");
+  const filterSelects = document.querySelectorAll(".filter-select select");
+
   let isFilterOpen = false;
-  
-  // Função para abrir/fechar filtros com animação
+
   function toggleFilters() {
     isFilterOpen = !isFilterOpen;
-    
+
     if (isFilterOpen) {
-      // Abrir filtros
-      filterButton.classList.add('active');
-      filterOptions.classList.add('show');
-      
-      // Animar cada item individualmente com delay
+      filterButton.classList.add("active");
+      filterOptions.classList.add("show");
+
       filterItems.forEach((item, index) => {
         setTimeout(() => {
-          item.classList.add('animate-in');
-        }, 100 + (index * 100)); // Delay escalonado
+          item.classList.add("animate-in");
+        }, 100 + index * 100);
       });
-      
     } else {
-      // Fechar filtros
-      filterButton.classList.remove('active');
-      
-      // Remover animação dos itens primeiro
-      filterItems.forEach(item => {
-        item.classList.remove('animate-in');
+      filterButton.classList.remove("active");
+
+      filterItems.forEach((item) => {
+        item.classList.remove("animate-in");
       });
-      
-      // Depois fechar o container com delay
+
       setTimeout(() => {
-        filterOptions.classList.remove('show');
+        filterOptions.classList.remove("show");
       }, 200);
     }
   }
-  
-  // Event listener para o botão de toggle
+
   if (filterButton) {
-    filterButton.addEventListener('click', function(e) {
+    filterButton.addEventListener("click", function (e) {
       e.preventDefault();
       toggleFilters();
     });
   }
-  
-  // Fechar filtros ao clicar fora
-  document.addEventListener('click', function(e) {
-    if (!e.target.closest('.filter-controls') && isFilterOpen) {
+
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest(".filter-controls") && isFilterOpen) {
       toggleFilters();
     }
   });
-  
-  // Filters logic removed - backend will handle filtering
-  
-  // Função para filtrar o conteúdo (exemplo de implementação)
+
   function filterContent(filters) {
-    // Esta função pode ser customizada baseada no conteúdo que precisa ser filtrado
-    // Por exemplo, se houver uma lista de documentos, cards, etc.
-    
-    const contentItems = document.querySelectorAll('.content-item, .document-item, .accordion-item');
-    
-    contentItems.forEach(item => {
+    const contentItems = document.querySelectorAll(
+      ".content-item, .document-item, .accordion-item"
+    );
+
+    contentItems.forEach((item) => {
       let shouldShow = true;
-      
-      // Verificar filtro de ano
+
       if (filters.ano) {
-        const itemYear = item.getAttribute('data-year') || item.querySelector('[data-year]')?.getAttribute('data-year');
+        const itemYear =
+          item.getAttribute("data-year") ||
+          item.querySelector("[data-year]")?.getAttribute("data-year");
         if (itemYear && itemYear !== filters.ano) {
           shouldShow = false;
         }
       }
-      
-      // Verificar filtro de tipo
+
       if (filters.tipo) {
-        const itemType = item.getAttribute('data-type') || item.querySelector('[data-type]')?.getAttribute('data-type');
+        const itemType =
+          item.getAttribute("data-type") ||
+          item.querySelector("[data-type]")?.getAttribute("data-type");
         if (itemType && itemType !== filters.tipo) {
           shouldShow = false;
         }
       }
-      
-      // Verificar filtro de data
+
       if (filters.data) {
-        // Implementar lógica de ordenação por data se necessário
-        // Esta parte dependeria da estrutura específica dos dados
       }
-      
-      // Mostrar/esconder item com animação suave
+
       if (shouldShow) {
-        item.style.display = '';
-        item.style.opacity = '1';
-        item.style.transform = 'translateY(0)';
+        item.style.display = "";
+        item.style.opacity = "1";
+        item.style.transform = "translateY(0)";
       } else {
-        item.style.opacity = '0';
-        item.style.transform = 'translateY(-10px)';
+        item.style.opacity = "0";
+        item.style.transform = "translateY(-10px)";
         setTimeout(() => {
-          if (item.style.opacity === '0') {
-            item.style.display = 'none';
+          if (item.style.opacity === "0") {
+            item.style.display = "none";
           }
         }, 300);
       }
     });
   }
-  
-  // Adicionar event listeners aos selects
-  filterSelects.forEach(select => {
-    select.addEventListener('change', function() {
-      // Atualizar aparência do select quando uma opção é selecionada
+
+  filterSelects.forEach((select) => {
+    select.addEventListener("change", function () {
       if (this.value) {
-        this.style.color = '#3b3b3b';
-        this.style.fontWeight = '500';
+        this.style.color = "#3b3b3b";
+        this.style.fontWeight = "500";
       } else {
-        this.style.color = '#6e6e6e';
-        this.style.fontWeight = '400';
+        this.style.color = "#6e6e6e";
+        this.style.fontWeight = "400";
       }
-      
-      // Aplicar filtros automaticamente quando uma opção é selecionada
+
       applyFilters();
     });
-    
-    // Efeito hover para os ícones SVG
-    select.addEventListener('focus', function() {
-      const svg = this.parentElement.querySelector('svg');
+
+    select.addEventListener("focus", function () {
+      const svg = this.parentElement.querySelector("svg");
       if (svg) {
-        svg.style.color = '#ea7425';
+        svg.style.color = "#ea7425";
       }
     });
-    
-    select.addEventListener('blur', function() {
-      const svg = this.parentElement.querySelector('svg');
+
+    select.addEventListener("blur", function () {
+      const svg = this.parentElement.querySelector("svg");
       if (svg) {
-        svg.style.color = '#6e6e6e';
+        svg.style.color = "#6e6e6e";
       }
     });
   });
-  
-  // Função para limpar todos os filtros
+
   function clearAllFilters() {
-    filterSelects.forEach(select => {
-      select.value = '';
-      select.style.color = '#6e6e6e';
-      select.style.fontWeight = '400';
+    filterSelects.forEach((select) => {
+      select.value = "";
+      select.style.color = "#6e6e6e";
+      select.style.fontWeight = "400";
     });
-    
-    // Mostrar todos os itens
-    const contentItems = document.querySelectorAll('.content-item, .document-item, .accordion-item');
-    contentItems.forEach(item => {
-      item.style.display = '';
-      item.style.opacity = '1';
-      item.style.transform = 'translateY(0)';
+
+    const contentItems = document.querySelectorAll(
+      ".content-item, .document-item, .accordion-item"
+    );
+    contentItems.forEach((item) => {
+      item.style.display = "";
+      item.style.opacity = "1";
+      item.style.transform = "translateY(0)";
     });
-    
-    // Fechar os filtros após limpar
+
     if (isFilterOpen) {
       toggleFilters();
     }
   }
-  
-  // Adicionar funcionalidade de tecla ESC para limpar filtros
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
       if (isFilterOpen) {
         toggleFilters();
       } else {
@@ -294,104 +411,68 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   });
-  
-  // Inicialização: verificar se há filtros pré-selecionados via URL
+
   function initializeFiltersFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
     let hasFilters = false;
-    
-    filterSelects.forEach(select => {
+
+    filterSelects.forEach((select) => {
       const paramValue = urlParams.get(select.name);
       if (paramValue) {
         select.value = paramValue;
-        select.style.color = '#3b3b3b';
-        select.style.fontWeight = '500';
+        select.style.color = "#3b3b3b";
+        select.style.fontWeight = "500";
         hasFilters = true;
       }
     });
-    
-    // Se há filtros na URL, abrir o painel automaticamente
+
     if (hasFilters && !isFilterOpen) {
       setTimeout(() => {
         toggleFilters();
       }, 500);
     }
-    
-    // Aplicar filtros se houver parâmetros na URL
+
     if (urlParams.toString()) {
       applyFilters();
     }
   }
-  
-  // Inicializar filtros da URL
+
   initializeFiltersFromURL();
-  
-  // Adicionar indicador visual quando há filtros ativos
+
   function updateFilterButton() {
-    const activeFilters = Array.from(filterSelects).filter(select => select.value);
-    
+    const activeFilters = Array.from(filterSelects).filter(
+      (select) => select.value
+    );
+
     if (activeFilters.length > 0) {
-      filterButton.classList.add('has-active-filters');
-      filterButton.style.position = 'relative';
-      
-      // Adicionar badge de contagem se não existir
-      if (!filterButton.querySelector('.filter-badge')) {
-        const badge = document.createElement('span');
-        badge.className = 'filter-badge';
-        badge.textContent = activeFilters.length;
-        badge.style.cssText = `
-          position: absolute;
-          top: -8px;
-          right: -8px;
-          background: #dc2626;
-          color: white;
-          border-radius: 50%;
-          width: 20px;
-          height: 20px;
-          font-size: 12px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-weight: 700;
-          z-index: 10;
-        `;
-        filterButton.appendChild(badge);
-      } else {
-        filterButton.querySelector('.filter-badge').textContent = activeFilters.length;
-      }
+      filterButton.classList.add("has-active-filters");
+      filterButton.style.position = "relative";
     } else {
-      filterButton.classList.remove('has-active-filters');
-      const badge = filterButton.querySelector('.filter-badge');
+      filterButton.classList.remove("has-active-filters");
+      const badge = filterButton.querySelector(".filter-badge");
       if (badge) {
         badge.remove();
       }
     }
   }
-  
-  // Atualizar badge quando filtros mudarem
-  filterSelects.forEach(select => {
-    select.addEventListener('change', updateFilterButton);
+
+  filterSelects.forEach((select) => {
+    select.addEventListener("change", updateFilterButton);
   });
-  
-  // Inicializar badge
+
   updateFilterButton();
 });
 
-// Accordion Component Integration with Bootstrap
 document.addEventListener("DOMContentLoaded", function () {
-  // Funcionalidade de download de arquivos
-  window.downloadFile = function(filename) {
-    // Simular download - substituir por lógica real de download
-    console.log('Downloading file:', filename);
-    
-    // Criar elemento temporário para download
-    const link = document.createElement('a');
-    link.href = `/downloads/${filename}`; // Ajustar caminho conforme necessário
+  window.downloadFile = function (filename) {
+    console.log("Downloading file:", filename);
+
+    const link = document.createElement("a");
+    link.href = `/downloads/${filename}`;
     link.download = filename;
-    link.target = '_blank';
-    
-    // Adicionar feedback visual
-    const downloadBtn = event.target.closest('.download-btn');
+    link.target = "_blank";
+
+    const downloadBtn = event.target.closest(".download-btn");
     if (downloadBtn) {
       const originalContent = downloadBtn.innerHTML;
       downloadBtn.innerHTML = `
@@ -400,82 +481,83 @@ document.addEventListener("DOMContentLoaded", function () {
           <path d="M10 6v4M10 14h.01" stroke="currentColor" stroke-width="2"/>
         </svg>
       `;
-      downloadBtn.style.background = '#22c55e';
-      downloadBtn.style.borderColor = '#22c55e';
-      
+      downloadBtn.style.background = "#22c55e";
+      downloadBtn.style.borderColor = "#22c55e";
+
       setTimeout(() => {
         downloadBtn.innerHTML = originalContent;
-        downloadBtn.style.background = '';
-        downloadBtn.style.borderColor = '';
+        downloadBtn.style.background = "";
+        downloadBtn.style.borderColor = "";
       }, 2000);
     }
-    
-    // Tentar fazer o download
+
     try {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     } catch (error) {
-      console.error('Erro ao fazer download:', error);
-      alert('Erro ao fazer download do arquivo. Tente novamente.');
+      console.error("Erro ao fazer download:", error);
+      alert("Erro ao fazer download do arquivo. Tente novamente.");
     }
   };
-  
-  // Configurar eventos dos accordions para controle exclusivo
-  const accordionElement = document.getElementById('estatutosAccordion');
-  
+
+  const accordionElement = document.getElementById("estatutosAccordion");
+
   if (accordionElement) {
-    // Evento quando um accordion está prestes a abrir
-    accordionElement.addEventListener('show.bs.collapse', function (event) {
+    accordionElement.addEventListener("show.bs.collapse", function (event) {
       const targetCollapse = event.target;
-      const targetButton = document.querySelector(`[data-bs-target="#${targetCollapse.id}"]`);
-      
-      // Fechar todos os outros accordions
-      const allCollapses = accordionElement.querySelectorAll('.accordion-collapse');
-      allCollapses.forEach(collapse => {
-        if (collapse !== targetCollapse && collapse.classList.contains('show')) {
+      const targetButton = document.querySelector(
+        `[data-bs-target="#${targetCollapse.id}"]`
+      );
+
+      const allCollapses = accordionElement.querySelectorAll(
+        ".accordion-collapse"
+      );
+      allCollapses.forEach((collapse) => {
+        if (
+          collapse !== targetCollapse &&
+          collapse.classList.contains("show")
+        ) {
           const collapseInstance = bootstrap.Collapse.getInstance(collapse);
           if (collapseInstance) {
             collapseInstance.hide();
           }
         }
       });
-      
-      // Adicionar classe active ao botão que está abrindo
+
       if (targetButton) {
-        targetButton.classList.remove('collapsed');
+        targetButton.classList.remove("collapsed");
       }
     });
-    
-    // Evento quando um accordion foi aberto
-    accordionElement.addEventListener('shown.bs.collapse', function (event) {
+
+    accordionElement.addEventListener("shown.bs.collapse", function (event) {
       const targetCollapse = event.target;
-      const targetButton = document.querySelector(`[data-bs-target="#${targetCollapse.id}"]`);
-      
+      const targetButton = document.querySelector(
+        `[data-bs-target="#${targetCollapse.id}"]`
+      );
+
       if (targetButton) {
-        targetButton.setAttribute('aria-expanded', 'true');
-        
-        // Scroll suave até o accordion aberto
+        targetButton.setAttribute("aria-expanded", "true");
+
         setTimeout(() => {
           targetCollapse.scrollIntoView({
-            behavior: 'smooth',
-            block: 'nearest'
+            behavior: "smooth",
+            block: "nearest",
           });
         }, 300);
       }
     });
-    
-    // Evento quando um accordion foi fechado
-    accordionElement.addEventListener('hidden.bs.collapse', function (event) {
+
+    accordionElement.addEventListener("hidden.bs.collapse", function (event) {
       const targetCollapse = event.target;
-      const targetButton = document.querySelector(`[data-bs-target="#${targetCollapse.id}"]`);
-      
+      const targetButton = document.querySelector(
+        `[data-bs-target="#${targetCollapse.id}"]`
+      );
+
       if (targetButton) {
-        targetButton.classList.add('collapsed');
-        targetButton.setAttribute('aria-expanded', 'false');
+        targetButton.classList.add("collapsed");
+        targetButton.setAttribute("aria-expanded", "false");
       }
     });
   }
-  
-  // Filter logic removed - backend will handle all filtering functionality
 });
