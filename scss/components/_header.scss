@@ -19,30 +19,45 @@ header {
   transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out,
     padding 0.3s ease-in-out;
 
+  @media (max-width: 1200px) {
+    padding-top: 12px;
+  }
+
   &.hide-header {
     transform: translateY(-100%);
     padding: 12px 0;
-    background: linear-gradient(
-      180deg,
-      var(--colors-primary-500, #e08022) 0%,
-      var(--colors-tertiary-500, #de2e0d) 77%
-    );
+    // background: linear-gradient(
+    //   180deg,
+    //   var(--colors-primary-500, #e08022) 0%,
+    //   var(--colors-tertiary-500, #de2e0d) 77%
+    // );
+    background-color: #e08022;
   }
 
   &.show-header {
     transform: translateY(0);
     padding: 12px 0;
-    background: linear-gradient(
-      180deg,
-      var(--colors-primary-500, #e08022) 0%,
-      var(--colors-tertiary-500, #de2e0d) 77%
-    );
+    // background: linear-gradient(
+    //   180deg,
+    //   var(--colors-primary-500, #e08022) 0%,
+    //   var(--colors-tertiary-500, #de2e0d) 77%
+    // );
+    background-color: #e08022;
   }
 
   &.at-top {
     transform: translateY(0);
     padding-top: 64px;
     background-color: transparent;
+
+    @media (max-width: 1200px) {
+      padding-top: 12px;
+
+      .content-header {
+        padding-bottom: 12px;
+        border-bottom: 1px solid #f2f2f2;
+      }
+    }
   }
 
   .content-header {
@@ -80,6 +95,10 @@ header {
           background: var(----colors-support-grey-100, #f7f7f7);
           display: flex;
           position: relative;
+
+          @media (max-width: 1200px) {
+            display: none;
+          }
         }
       }
 
@@ -320,6 +339,10 @@ header {
   width: 100%;
   z-index: 1000;
 
+  @media (max-width: 1200px) {
+    display: none;
+  }
+
   .content-acessibility {
     display: flex;
     justify-content: space-between;
@@ -377,6 +400,10 @@ header {
       align-items: center;
       gap: 40px;
 
+      @media (max-width: 1200px) {
+        display: none;
+      }
+
       .tools {
         display: flex;
         align-items: center;
@@ -419,7 +446,12 @@ header {
               transition: transform 0.3s ease;
             }
 
-            &.active .dropdown-arrow {
+            img {
+              transition: all 0.3s ease;
+            }
+
+            &.active img {
+              transition: all 0.3s ease;
               transform: rotate(180deg);
             }
           }
@@ -479,14 +511,12 @@ header {
   }
 }
 
-// === RESPONSIVE MOBILE ADAPTATIONS ===
 .header-actions {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-// Mobile Menu Toggle (Hamburger)
 .mobile-menu-toggle {
   display: none;
   flex-direction: column;
@@ -537,70 +567,68 @@ header {
       }
     }
   }
+}
 
-  &:hover .hamburger-line {
-    background-color: var(--colors-primary-500, #ea7425);
+.mobile-arrow {
+  color: var(--colors-support-grey-100, #f7f7f7);
+  font-family: "Poppins";
+  font-size: 20px;
+  font-weight: 300;
+  width: 32px;
+  height: 32px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  flex-shrink: 0;
+
+  &::before {
+    content: "+";
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
 }
 
-// Mobile Arrow - Hidden on desktop, shown on mobile
-.mobile-arrow {
-  display: none;
-  color: var(--colors-support-grey-100, #f7f7f7);
-  transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
-  flex-shrink: 0;
-}
-
-// Responsive Breakpoints - SAME HTML, different behavior
 @media (max-width: 1200px) {
   .mobile-menu-toggle {
     display: flex;
   }
 
-  .search-bar {
-    display: none;
-  }
+  .logo {
+    position: relative;
+    z-index: 1001;
 
-  .content-header {
-    .logo {
-      img {
-        max-width: 140px;
-      }
+    img {
+      max-width: 80px;
     }
   }
 
-  // Transform existing .navigation into mobile overlay
+  .search-bar {
+    // display: none;
+  }
+
   .navigation {
-    // Hide by default on mobile
-    position: fixed;
+    position: absolute !important;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
-    background: linear-gradient(
-      180deg,
-      var(--colors-primary-500, #e08022) 0%,
-      var(--colors-tertiary-500, #de2e0d) 100%
-    );
+    background: #e08022;
     z-index: 1000;
     transform: translateX(-100%);
     transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
     overflow-y: auto;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 80px 24px 40px 24px;
-    
-    // Show when active
+    padding: 174px 12px 40px 12px;
+
     &.mobile-active {
       transform: translateX(0);
     }
 
-    // Transform menu-items into mobile layout
     .menu-items {
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       padding: 0;
       margin: 0;
 
@@ -612,48 +640,61 @@ header {
         display: none;
       }
 
-      // Transform dropdowns into accordions
       .dropdown {
         width: 100%;
         position: static;
 
+        &.active {
+          p {
+            color: #f7f7f7 !important;
+            border-bottom: none !important;
+            background: transparent !important;
+          }
+        }
+
         .dropdown-toggle {
           width: 100%;
           justify-content: space-between;
-          padding: 20px 0;
+          padding: 12px 0;
 
-          // Show arrow on mobile
+          &:hover {
+            p {
+              color: #f7f7f7;
+              border-bottom: none;
+              background-color: transparent;
+            }
+          }
+
+          p {
+            color: #f7f7f7;
+            font-family: "Poppins";
+            font-size: rem(21);
+            font-style: normal;
+            font-weight: 600;
+            line-height: 116%;
+          }
+
           .mobile-arrow {
-            display: block;
+            display: flex;
           }
 
           &[aria-expanded="true"] {
             .mobile-arrow {
               transform: rotate(180deg);
-            }
-          }
 
-          &:hover {
-            p {
-              border-bottom: none;
-              background: transparent;
-              color: #ffffff;
-            }
-            
-            .mobile-arrow {
-              color: #ffffff;
+              &::before {
+                content: "−";
+              }
             }
           }
         }
 
-        // Transform dropdown-menu into accordion content
         .dropdown-menu {
           position: static;
           display: flex !important;
           opacity: 1;
           transform: none;
           pointer-events: auto;
-          background: transparent;
           border: none;
           padding: 0;
           margin: 0;
@@ -664,24 +705,26 @@ header {
           max-height: 0;
           overflow: hidden;
           transition: max-height 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+          border-radius: 8px !important;
+          gap: 0;
 
           &.mobile-show {
             max-height: 500px;
-            padding: 0 0 16px 0;
           }
         }
 
-        // Style dropdown items for mobile
         .dropdown-item {
-          padding: 12px 0;
-          color: rgba(247, 247, 247, 0.8);
-          font-family: "Poppins", sans-serif;
-          font-size: 16px;
-          font-weight: 400;
-          line-height: 116%;
+          padding: 12px;
           transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
           position: relative;
-          
+
+          color: #6e6e6e;
+          font-family: "Poppins";
+          font-size: rem(21);
+          font-style: normal;
+          font-weight: 400;
+          line-height: 116%;
+
           &:before {
             content: "";
             position: absolute;
@@ -693,16 +736,6 @@ header {
             transition: width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
           }
 
-          &:hover {
-            color: #ffffff;
-            background-color: transparent;
-            transform: translateX(8px);
-            
-            &:before {
-              width: 40px;
-            }
-          }
-
           &:after {
             display: none;
           }
@@ -710,7 +743,6 @@ header {
       }
     }
 
-    // Add mobile search at the end
     &:after {
       content: "";
       display: block;
@@ -721,12 +753,10 @@ header {
     }
   }
 
-  // Add search input after navigation
   .navigation::after {
     display: none;
   }
 
-  // Create mobile search area
   .navigation {
     &.mobile-active::after {
       content: "";
@@ -734,8 +764,6 @@ header {
       margin-top: 32px;
       padding: 16px 0 0;
       border-top: 1px solid rgba(255, 255, 255, 0.1);
-      
-      // This is a bit of a hack, but we'll handle the search input via JS
     }
   }
 }
@@ -777,7 +805,7 @@ header {
     .menu-items .dropdown {
       .dropdown-toggle {
         padding: 16px 0;
-        
+
         p {
           font-size: 15px;
         }

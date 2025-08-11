@@ -28,6 +28,10 @@
     align-items: center;
     gap: 32px;
 
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
     .timeline-text {
       display: flex;
       flex-direction: column;
@@ -40,6 +44,10 @@
         font-size: 26px;
         font-weight: 700;
         line-height: 120%;
+
+        @media (max-width: 1200px) {
+          font-size: 24px;
+        }
       }
 
       p {
@@ -49,6 +57,10 @@
         font-size: 18px;
         line-height: 140%;
         color: #3b3b3b;
+
+        @media (max-width: 1200px) {
+          font-size: 16px;
+        }
       }
     }
 
@@ -61,6 +73,11 @@
         height: auto;
         object-fit: cover;
         width: 100%;
+        border-radius: 16px;
+
+        @media (max-width: 1200px) {
+          height: 250px;
+        }
       }
 
       .multi-logo {
@@ -276,9 +293,12 @@
   border-radius: 16px;
   background: #f2f2f2;
 
-  @media (max-width: 768px) {
-    padding: 24px;
+  @media (max-width: 1200px) {
+    padding: 32px;
     gap: 20px;
+  }
+
+  @media (max-width: 991px) {
   }
 }
 

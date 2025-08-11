@@ -24,8 +24,8 @@ $(document).ready(function () {
             992: {
               slidesPerView: 4.2,
               centeredSlides: false,
-            }
-          }
+            },
+          },
         });
       }
     } else if (destaquesSwiper) {
@@ -35,15 +35,15 @@ $(document).ready(function () {
   }
 
   initDestaquesSwiper();
-  window.addEventListener('resize', initDestaquesSwiper);
+  window.addEventListener("resize", initDestaquesSwiper);
   const tickersSwiper = new Swiper(".tickers-swiper", {
-    slidesPerView: 2,
+    slidesPerView: 1,
     spaceBetween: 32,
-    // loop: true,
-    // autoplay: {
-    //   delay: 3000,
-    //   disableOnInteraction: false,
-    // },
+    loop: true,
+    autoplay: {
+      delay: 2000,
+      disableOnInteraction: false,
+    },
     breakpoints: {
       768: {
         slidesPerView: 2,
@@ -58,15 +58,11 @@ $(document).ready(function () {
 
   const bannerSwiper = new Swiper(".banner-swiper", {
     slidesPerView: 1,
-    // loop: true,
-    // autoplay: {
-    //   delay: 3000,
-    //   disableOnInteraction: false,
-    // },
     effect: "fade",
     fadeEffect: {
       crossFade: true,
     },
+    speed: 600,
     allowTouchMove: true,
     pagination: {
       el: ".swiper-pagination",
@@ -76,16 +72,61 @@ $(document).ready(function () {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev",
     },
+    on: {
+      slideChangeTransitionStart: function () {
+        $(".banner-swiper .text-slide").removeClass("slide-active");
+        $(".banner-swiper .video-slide").removeClass("slide-active");
+      },
+      slideChangeTransitionEnd: function () {
+        const activeSlide = $(".banner-swiper .swiper-slide-active");
+        if (activeSlide.length) {
+          activeSlide.find(".text-slide").addClass("slide-active");
+          activeSlide.find(".video-slide").addClass("slide-active");
+        }
+      },
+      init: function () {
+        setTimeout(() => {
+          const activeSlide = $(".banner-swiper .swiper-slide-active");
+          if (activeSlide.length) {
+            activeSlide.find(".text-slide").addClass("slide-active");
+            activeSlide.find(".video-slide").addClass("slide-active");
+          }
+        }, 100);
+      },
+    },
   });
 
   const swiperParceiros = new Swiper(".mySwiper-parceiros", {
-    slidesPerView: 5,
-    centeredSlides: true,
+    slidesPerView: 1,
+    centeredSlides: false,
+    spaceBetween: 24,
     loop: true,
     spaceBetween: 16,
     navigation: {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      480: {
+        slidesPerView: 2,
+        spaceBetween: 16,
+        centeredSlides: false,
+      },
+      768: {
+        slidesPerView: 3,
+        spaceBetween: 16,
+        centeredSlides: false,
+      },
+      992: {
+        slidesPerView: 4,
+        spaceBetween: 16,
+        centeredSlides: true,
+      },
+      1200: {
+        slidesPerView: 5,
+        spaceBetween: 16,
+        centeredSlides: true,
+      },
     },
     on: {
       slideChangeTransitionEnd: function () {
@@ -110,7 +151,7 @@ $(document).ready(function () {
   const marcasSwiper = new Swiper(".marcas-swiper", {
     effect: "fade",
     fadeEffect: {
-      crossFade: true
+      crossFade: true,
     },
     speed: 800,
     loop: true,
@@ -125,6 +166,6 @@ $(document).ready(function () {
     navigation: {
       nextEl: ".marcas-destaque .swiper-button-next",
       prevEl: ".marcas-destaque .swiper-button-prev",
-    }
+    },
   });
 });

@@ -5,6 +5,14 @@
   z-index: 1;
   background-color: #1d1d1d;
 
+  @media (max-width: 1200px) {
+    height: 350px;
+  }
+
+  @media (max-width: 991px) {
+    height: 300px;
+  }
+
   &::before {
     content: "";
     position: absolute;
@@ -47,6 +55,8 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    gap: 18px;
+    flex-wrap: wrap;
 
     .title-page {
       h1 {
@@ -58,6 +68,14 @@
         font-style: normal;
         font-weight: 700;
         line-height: 120%;
+
+        @media (max-width: 1200px) {
+          font-size: 32px;
+        }
+
+        @media (max-width: 991px) {
+          font-size: 28px;
+        }
       }
     }
 
@@ -66,6 +84,10 @@
       display: flex;
       align-items: center;
       margin-right: 80px;
+
+      @media (max-width: 1200px) {
+        margin-right: 0px;
+      }
 
       a {
         margin: 0 !important;
@@ -78,6 +100,10 @@
         line-height: 140%;
         display: flex;
         opacity: 0.72;
+
+        @media (max-width: 1200px) {
+          font-size: 14px;
+        }
 
         &:first-child {
           &:before {
@@ -96,7 +122,6 @@
 
         &:last-child {
           color: #fcfcfc;
-          font-size: 16px;
           font-style: normal;
           font-weight: 700 !important;
           line-height: 140%;
@@ -114,6 +139,10 @@
     gap: 32px;
     padding: 112px 0px;
 
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
     .box {
       display: flex;
       flex-direction: column;
@@ -123,6 +152,10 @@
         object-fit: cover;
         width: 100%;
         border-radius: 8px;
+
+        @media (max-width: 1200px) {
+          height: 300px;
+        }
       }
 
       h3 {
@@ -214,6 +247,14 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 32px;
 
+    @media (max-width: 991px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
     .cards {
       height: 350px;
       overflow: hidden;
@@ -295,6 +336,10 @@
         z-index: 10;
         pointer-events: none;
 
+        @media (max-width: 991px) {
+          padding: 24px;
+        }
+
         h4 {
           margin: 0;
           color: #fcfcfc;
@@ -332,6 +377,19 @@
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 16px;
+
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 991px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 768px) {
+      gap: 24px;
+      grid-template-columns: repeat(1, 1fr);
+    }
 
     .box {
       overflow: hidden;
@@ -460,6 +518,10 @@
 .title-marcas {
   max-width: 848px;
 
+  @media (max-width: 1200px) {
+    max-width: 100%;
+  }
+
   h2 {
     margin: 0;
     margin-bottom: 16px;
@@ -469,6 +531,14 @@
     font-style: normal;
     font-weight: 400;
     line-height: 120%;
+
+    @media (max-width: 1200px) {
+      font-size: 28px;
+    }
+
+    @media (max-width: 991px) {
+      font-size: 24px;
+    }
   }
 
   h3 {
@@ -480,6 +550,10 @@
     font-style: normal;
     font-weight: 400;
     line-height: 120%;
+
+    @media (max-width: 1200px) {
+      font-size: 24px;
+    }
   }
 }
 
@@ -505,6 +579,16 @@
       position: absolute;
       max-width: 700px;
       height: 100%;
+
+      @media (max-width: 1200px) {
+        max-width: 100%;
+        padding: 48px;
+      }
+
+      @media (max-width: 991px) {
+        padding: 32px;
+        padding-bottom: 82px;
+      }
 
       .kfc-logo {
         margin-bottom: 16px;
@@ -540,6 +624,7 @@
         align-items: center;
         border-top: 1px solid #e0e0e0;
         padding-top: 32px;
+        flex-wrap: wrap;
 
         .btn-primary {
           padding: 16px 24px;
@@ -591,6 +676,12 @@
         display: flex;
         align-items: center;
         gap: 16px;
+
+        @media (max-width: 991px) {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
 
         span {
           color: #fcfcfc;
@@ -659,6 +750,15 @@
       top: -95px;
       position: relative;
       padding-left: 40px;
+
+      @media (max-width: 1200px) {
+        top: -63px;
+        padding-left: 40px;
+      }
+
+      @media (max-width: 991px) {
+        padding-left: 19px;
+      }
 
       .swiper-button-prev {
         cursor: pointer;
@@ -1280,6 +1380,15 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 32px;
 
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 991px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
     .director-card {
       border-radius: 16px;
       border: 1px solid var(----colors-support-grey-300, #ebebeb);
@@ -1293,6 +1402,10 @@
       cursor: pointer;
       position: relative;
       overflow: hidden;
+
+      @media (max-width: 991px) {
+        padding: 32px;
+      }
 
       h3 {
         margin: 0;
@@ -1498,8 +1611,8 @@
 @media (max-width: 768px) {
   .filter {
     .filter-controls {
-      flex-direction: column;
-      align-items: stretch;
+      // flex-direction: column;
+      // align-items: stretch;
 
       .filter-button {
         justify-content: center;
@@ -1683,6 +1796,17 @@
               background: #f7f7f7;
               transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 
+              @media (max-width: 991px) {
+                display: flex;
+                flex-wrap: wrap;
+              }
+
+              @media (max-width: 500px) {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+              }
+
               &:hover {
                 transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
                 border-color: #ea7425;
@@ -1731,6 +1855,11 @@
                 align-items: center;
                 justify-content: center;
 
+                @media (max-width: 991px) {
+                  justify-content: flex-end;
+                  flex: 1;
+                }
+
                 img {
                   filter: grayscale(1);
                   transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -1774,6 +1903,17 @@
     border: 1px solid #f5f5f5;
     background: #f7f7f7;
     transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+    @media (max-width: 991px) {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    @media (max-width: 500px) {
+      flex-direction: column;
+      align-items: flex-start;
+    }
 
     &:hover {
       transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -1823,6 +1963,15 @@
       align-items: center;
       justify-content: center;
 
+      @media (max-width: 991px) {
+        justify-content: flex-end;
+        flex: 1;
+      }
+
+      @media (max-width: 500px) {
+        justify-content: flex-start;
+      }
+
       img {
         filter: grayscale(1);
         transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -1837,6 +1986,11 @@
     grid-template-columns: 1fr 1fr;
     gap: 48px;
     align-items: start;
+
+    @media (max-width: 991px) {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
 
     .video-section {
       height: 100%;
@@ -1855,6 +2009,10 @@
           height: 100%;
           object-fit: cover;
           display: block;
+
+          @media (max-width: 991px) {
+            height: 300px;
+          }
         }
       }
     }
@@ -1939,6 +2097,12 @@
   padding: 0;
 }
 
+.w-calendar {
+  overflow: hidden;
+  overflow-x: auto;
+  position: relative;
+}
+
 .container-eventos {
   .title-proximos-eventos {
     margin-bottom: 16px;
@@ -1954,6 +2118,11 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 32px;
+
+    @media (max-width: 991px) {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
   }
 
   .list-calendario {
@@ -2174,7 +2343,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: 120%;
-        padding: 24px;
+        padding: 20px 8px;
         text-align: center;
       }
     }
@@ -2186,6 +2355,10 @@
         height: 64px;
         border: 1px solid #f2f2f2;
         background-color: #fff;
+
+        @media (max-width: 575px) {
+          padding: 0;
+        }
 
         a {
           display: flex;
@@ -2565,6 +2738,13 @@
     padding: 24px 12px;
     transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 
+    @media (max-width: 991px) {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
     &:hover {
       border-color: #ea7425;
 
@@ -2638,12 +2818,24 @@
     display: flex;
     gap: 32px;
 
+    @media (max-width: 991px) {
+      flex-direction: column;
+    }
+
     .form {
       width: 65%;
+
+      @media (max-width: 991px) {
+        width: 100%;
+      }
 
       .title-form {
         width: 408px;
         margin-bottom: 32px;
+
+        @media (max-width: 991px) {
+          width: 100%;
+        }
 
         h3 {
           margin: 0;
@@ -2783,6 +2975,7 @@
         display: flex;
         justify-content: space-between;
         gap: 16px;
+        flex-wrap: wrap;
         padding-top: 16px;
         border-top: 1px solid #f5f5f5;
         a {
@@ -2801,6 +2994,10 @@
       display: flex;
       flex-direction: column;
       gap: 32px;
+
+      @media (max-width: 991px) {
+        width: 100%;
+      }
 
       h4 {
         margin-bottom: 8px !important;
@@ -2855,6 +3052,15 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 32px;
+
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
 
     .box-atend {
       border-radius: 8px;
@@ -2948,6 +3154,10 @@
       width: 280px;
       margin-bottom: 48px;
 
+      @media (max-width: 991px) {
+        width: 100%;
+      }
+
       h2 {
         margin: 0;
         color: #ea7425;
@@ -2963,6 +3173,10 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 32px;
+
+      @media (max-width: 991px) {
+        grid-template-columns: repeat(1, 1fr);
+      }
 
       .cards {
         display: flex;
@@ -3009,14 +3223,23 @@
           line-height: 140%;
         }
 
-        // a {
-        //   margin-top: 59px;
-        // }
-
         .images-card {
           display: grid;
           grid-template-columns: repeat(5, 1fr);
           gap: 16px;
+          width: 100%;
+
+          @media (max-width: 1200px) {
+            grid-template-columns: repeat(3, 1fr);
+          }
+
+          @media (max-width: 991px) {
+            grid-template-columns: repeat(2, 1fr);
+          }
+
+          @media (max-width: 768px) {
+            grid-template-columns: repeat(1, 1fr);
+          }
 
           img {
             width: 100%;
