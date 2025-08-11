@@ -59,6 +59,12 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+AOS.init({
+  duration: 800,
+  easing: "ease-in-out",
+  once: true,
+});
+
 $(document).ready(function () {
   $(".dropdown").hover(
     function () {
@@ -480,7 +486,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Toggle Mobile Menu
   function toggleMobileMenu() {
     const isActive = mobileMenuToggle.classList.contains("active");
-    
+
     if (isActive) {
       closeMobileMenu();
     } else {
@@ -498,10 +504,10 @@ document.addEventListener("DOMContentLoaded", function () {
     mobileMenuToggle.classList.remove("active");
     navigation.classList.remove("mobile-active");
     body.style.overflow = "";
-    
+
     // Close all accordions when menu closes
     if (isMobileMode()) {
-      dropdownToggles.forEach(toggle => {
+      dropdownToggles.forEach((toggle) => {
         const dropdownMenu = toggle.nextElementSibling;
         toggle.setAttribute("aria-expanded", "false");
         dropdownMenu.classList.remove("mobile-show");
@@ -511,7 +517,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Mobile Menu Toggle Click
   if (mobileMenuToggle) {
-    mobileMenuToggle.addEventListener("click", function(e) {
+    mobileMenuToggle.addEventListener("click", function (e) {
       e.preventDefault();
       e.stopPropagation();
       toggleMobileMenu();
@@ -520,7 +526,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Close menu when clicking outside (mobile only)
   if (navigation) {
-    navigation.addEventListener("click", function(e) {
+    navigation.addEventListener("click", function (e) {
       if (isMobileMode() && e.target === navigation) {
         closeMobileMenu();
       }
@@ -528,25 +534,25 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Handle dropdown behavior - SAME ELEMENTS, different behavior based on screen size
-  dropdownToggles.forEach(toggle => {
-    toggle.addEventListener("click", function(e) {
+  dropdownToggles.forEach((toggle) => {
+    toggle.addEventListener("click", function (e) {
       if (isMobileMode()) {
         // Mobile accordion behavior
         e.preventDefault();
         e.stopPropagation();
-        
+
         const dropdownMenu = this.nextElementSibling;
         const isExpanded = this.getAttribute("aria-expanded") === "true";
-        
+
         // Close all other accordions
-        dropdownToggles.forEach(otherToggle => {
+        dropdownToggles.forEach((otherToggle) => {
           if (otherToggle !== this) {
             const otherMenu = otherToggle.nextElementSibling;
             otherToggle.setAttribute("aria-expanded", "false");
             otherMenu.classList.remove("mobile-show");
           }
         });
-        
+
         // Toggle current accordion
         if (isExpanded) {
           this.setAttribute("aria-expanded", "false");
@@ -561,8 +567,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Close menu when clicking on links (mobile only)
-  dropdownItems.forEach(item => {
-    item.addEventListener("click", function() {
+  dropdownItems.forEach((item) => {
+    item.addEventListener("click", function () {
       if (isMobileMode()) {
         // Add small delay to allow navigation
         setTimeout(() => {
@@ -573,18 +579,18 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Close menu on ESC key
-  document.addEventListener("keydown", function(e) {
+  document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && navigation.classList.contains("mobile-active")) {
       closeMobileMenu();
     }
   });
 
   // Handle window resize
-  window.addEventListener("resize", function() {
+  window.addEventListener("resize", function () {
     if (window.innerWidth > 1200) {
       closeMobileMenu();
       // Reset all mobile states
-      dropdownToggles.forEach(toggle => {
+      dropdownToggles.forEach((toggle) => {
         const dropdownMenu = toggle.nextElementSibling;
         toggle.setAttribute("aria-expanded", "false");
         dropdownMenu.classList.remove("mobile-show");
@@ -594,26 +600,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Add touch event handling for better mobile experience
   let touchStartY = 0;
-  
+
   if (navigation) {
-    navigation.addEventListener("touchstart", function(e) {
+    navigation.addEventListener("touchstart", function (e) {
       if (isMobileMode() && navigation.classList.contains("mobile-active")) {
         touchStartY = e.touches[0].clientY;
       }
     });
 
-    navigation.addEventListener("touchmove", function(e) {
+    navigation.addEventListener("touchmove", function (e) {
       if (isMobileMode() && navigation.classList.contains("mobile-active")) {
         const touchY = e.touches[0].clientY;
         const touchDelta = touchY - touchStartY;
-        
+
         // If trying to scroll up when already at top, prevent default
         if (this.scrollTop === 0 && touchDelta > 0) {
           e.preventDefault();
         }
-        
+
         // If trying to scroll down when at bottom, prevent default
-        if (this.scrollTop >= this.scrollHeight - this.clientHeight && touchDelta < 0) {
+        if (
+          this.scrollTop >= this.scrollHeight - this.clientHeight &&
+          touchDelta < 0
+        ) {
           e.preventDefault();
         }
       }

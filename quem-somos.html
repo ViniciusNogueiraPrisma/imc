@@ -53,6 +53,9 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
     />
+
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -468,12 +471,12 @@
       <div class="container container-full">
         <div class="main-content-qs">
           <div class="box">
-            <h2>
+            <h2 data-aos="fade-up" data-aos-duration="200">
               Somos uma das maiores plataformas de serviços de alimentação do
               país, com atuação também nos Estados Unidos
             </h2>
 
-            <p>
+            <p data-aos="fade-up" data-aos-duration="400">
               Com mais de 550 lojas no Brasil e nos EUA, somos especializados em
               serviços de alimentação. No Grupo IMC, nossos clientes estão no
               centro de tudo o que fazemos, por isso, temos compromisso com a
@@ -488,22 +491,25 @@
               nos EUA, temos a rede de restaurantes Margaritaville.
             </p>
 
-            <a href="#" target="_blank"
-              >Quer saber mais sobre nosso dia a dia? Nos acompanhe no LinkedIn.
-              <img src="images/Linkedin.svg" alt="Linkedin" />
-            </a>
+            <div data-aos="fade-up" data-aos-duration="600">
+              <a href="#" target="_blank"
+                >Quer saber mais sobre nosso dia a dia? Nos acompanhe no
+                LinkedIn.
+                <img src="images/Linkedin.svg" alt="Linkedin" />
+              </a>
+            </div>
           </div>
 
-          <div class="box">
+          <div class="box" data-aos="fade-left" data-aos-duration="800">
             <img src="images/box-qs.png" alt="" />
           </div>
         </div>
 
         <div class="timeline-qs">
           <div class="title-timeline">
-            <h3>Nossa História</h3>
+            <h3 data-aos="fade-up" data-aos-duration="200">Nossa História</h3>
           </div>
-          <div class="style-main">
+          <div class="style-main" data-aos="fade-up" data-aos-duration="400">
             <div class="swiper timeline-slider">
               <div class="swiper-wrapper">
                 <div class="swiper-slide" data-year="2006">
@@ -1182,6 +1188,9 @@
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script src="js/main.js"></script>
     <script src="js/swiper.js"></script>
