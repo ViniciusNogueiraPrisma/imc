@@ -26,23 +26,30 @@ header {
   &.hide-header {
     transform: translateY(-100%);
     padding: 12px 0;
-    // background: linear-gradient(
-    //   180deg,
-    //   var(--colors-primary-500, #e08022) 0%,
-    //   var(--colors-tertiary-500, #de2e0d) 77%
-    // );
-    background-color: #e08022;
+    background: linear-gradient(
+      180deg,
+      var(--colors-primary-500, #e08022) 0%,
+      var(--colors-tertiary-500, #de2e0d) 77%
+    );
+    background-color: #ea7425;
   }
 
   &.show-header {
     transform: translateY(0);
     padding: 12px 0;
-    // background: linear-gradient(
-    //   180deg,
-    //   var(--colors-primary-500, #e08022) 0%,
-    //   var(--colors-tertiary-500, #de2e0d) 77%
-    // );
-    background-color: #e08022;
+    background: linear-gradient(
+      180deg,
+      var(--colors-primary-500, #e08022) 0%,
+      var(--colors-tertiary-500, #de2e0d) 77%
+    );
+
+    .logo {
+      transition: all 0.3s ease;
+      img {
+        max-width: 100px !important;
+        transition: all 0.3s ease;
+      }
+    }
   }
 
   &.at-top {
@@ -66,8 +73,11 @@ header {
     align-items: center;
 
     .logo {
+      transition: all 0.3s ease;
       img {
+        transition: all 0.3s ease;
         width: 100%;
+        max-width: 100%;
       }
     }
 

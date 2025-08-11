@@ -65,7 +65,7 @@
   }
 
   .banner-swiper {
-    margin-top: 200px;
+    margin-top: 190px;
 
     @media (max-width: 1200px) {
       width: 100%;
@@ -485,7 +485,6 @@
         transform: translateY(0);
         opacity: 1;
         transition: all 0.3s ease;
-        // color: #ea7425;
         gap: 8px;
 
         &:before {
@@ -536,6 +535,7 @@
       position: relative;
       display: inline-flex;
       align-items: center;
+      margin-right: 15px;
 
       @media (max-width: 991px) {
         opacity: 1;
