@@ -478,3 +478,315 @@ header {
     }
   }
 }
+
+// === RESPONSIVE MOBILE ADAPTATIONS ===
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+// Mobile Menu Toggle (Hamburger)
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  gap: 4px;
+  z-index: 1001;
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  .hamburger-line {
+    width: 24px;
+    height: 2px;
+    background-color: var(--colors-support-grey-100, #f7f7f7);
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    transform-origin: center;
+
+    &:nth-child(1) {
+      transform: translateY(0);
+    }
+
+    &:nth-child(2) {
+      opacity: 1;
+    }
+
+    &:nth-child(3) {
+      transform: translateY(0);
+    }
+  }
+
+  &.active {
+    .hamburger-line {
+      &:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+      }
+
+      &:nth-child(2) {
+        opacity: 0;
+      }
+
+      &:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+    }
+  }
+
+  &:hover .hamburger-line {
+    background-color: var(--colors-primary-500, #ea7425);
+  }
+}
+
+// Mobile Arrow - Hidden on desktop, shown on mobile
+.mobile-arrow {
+  display: none;
+  color: var(--colors-support-grey-100, #f7f7f7);
+  transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  flex-shrink: 0;
+}
+
+// Responsive Breakpoints - SAME HTML, different behavior
+@media (max-width: 1200px) {
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .search-bar {
+    display: none;
+  }
+
+  .content-header {
+    .logo {
+      img {
+        max-width: 140px;
+      }
+    }
+  }
+
+  // Transform existing .navigation into mobile overlay
+  .navigation {
+    // Hide by default on mobile
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(
+      180deg,
+      var(--colors-primary-500, #e08022) 0%,
+      var(--colors-tertiary-500, #de2e0d) 100%
+    );
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+    overflow-y: auto;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 80px 24px 40px 24px;
+    
+    // Show when active
+    &.mobile-active {
+      transform: translateX(0);
+    }
+
+    // Transform menu-items into mobile layout
+    .menu-items {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0;
+      margin: 0;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:before {
+        display: none;
+      }
+
+      // Transform dropdowns into accordions
+      .dropdown {
+        width: 100%;
+        position: static;
+
+        .dropdown-toggle {
+          width: 100%;
+          justify-content: space-between;
+          padding: 20px 0;
+
+          // Show arrow on mobile
+          .mobile-arrow {
+            display: block;
+          }
+
+          &[aria-expanded="true"] {
+            .mobile-arrow {
+              transform: rotate(180deg);
+            }
+          }
+
+          &:hover {
+            p {
+              border-bottom: none;
+              background: transparent;
+              color: #ffffff;
+            }
+            
+            .mobile-arrow {
+              color: #ffffff;
+            }
+          }
+        }
+
+        // Transform dropdown-menu into accordion content
+        .dropdown-menu {
+          position: static;
+          display: flex !important;
+          opacity: 1;
+          transform: none;
+          pointer-events: auto;
+          background: transparent;
+          border: none;
+          padding: 0;
+          margin: 0;
+          max-width: none;
+          min-width: auto;
+          width: 100%;
+          box-shadow: none;
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+
+          &.mobile-show {
+            max-height: 500px;
+            padding: 0 0 16px 0;
+          }
+        }
+
+        // Style dropdown items for mobile
+        .dropdown-item {
+          padding: 12px 0;
+          color: rgba(247, 247, 247, 0.8);
+          font-family: "Poppins", sans-serif;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 116%;
+          transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+          position: relative;
+          
+          &:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 8px;
+            width: 0;
+            height: 1px;
+            background-color: #ffffff;
+            transition: width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+          }
+
+          &:hover {
+            color: #ffffff;
+            background-color: transparent;
+            transform: translateX(8px);
+            
+            &:before {
+              width: 40px;
+            }
+          }
+
+          &:after {
+            display: none;
+          }
+        }
+      }
+    }
+
+    // Add mobile search at the end
+    &:after {
+      content: "";
+      display: block;
+      width: 100%;
+      margin-top: 32px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  // Add search input after navigation
+  .navigation::after {
+    display: none;
+  }
+
+  // Create mobile search area
+  .navigation {
+    &.mobile-active::after {
+      content: "";
+      position: relative;
+      margin-top: 32px;
+      padding: 16px 0 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      
+      // This is a bit of a hack, but we'll handle the search input via JS
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .content-header {
+    .logo {
+      img {
+        max-width: 120px;
+      }
+    }
+  }
+
+  .navigation {
+    padding: 60px 20px 40px;
+
+    .menu-items .dropdown .dropdown-toggle p {
+      font-size: 16px;
+    }
+
+    .menu-items .dropdown .dropdown-item {
+      font-size: 15px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .content-header {
+    .logo {
+      img {
+        max-width: 100px;
+      }
+    }
+  }
+
+  .navigation {
+    padding: 50px 16px 30px;
+
+    .menu-items .dropdown {
+      .dropdown-toggle {
+        padding: 16px 0;
+        
+        p {
+          font-size: 15px;
+        }
+      }
+
+      .dropdown-item {
+        font-size: 14px;
+        padding: 10px 0;
+      }
+    }
+  }
+}

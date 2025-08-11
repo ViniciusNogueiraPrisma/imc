@@ -134,6 +134,10 @@
                   <button class="dropdown-toggle" type="button" id="dropdownMenu-1" aria-expanded="false"
                     data-bs-toggle="dropdown">
                     <p>Grupo IMC</p>
+                    <svg class="mobile-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                      <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    </svg>
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu-1">
                     <li class="dropdown-page">
@@ -152,6 +156,10 @@
                   <button class="dropdown-toggle" type="button" id="dropdownMenu-2" aria-expanded="false"
                     data-bs-toggle="dropdown">
                     <p>Marcas IMC</p>
+                    <svg class="mobile-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                      <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    </svg>
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu-2">
                     <li class="dropdown-page">
@@ -194,6 +202,10 @@
                   <button class="dropdown-toggle" type="button" id="dropdownMenu-3" aria-expanded="false"
                     data-bs-toggle="dropdown">
                     <p>Governança</p>
+                    <svg class="mobile-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                      <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    </svg>
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu-3">
                     <li class="dropdown-page">
@@ -220,6 +232,10 @@
                   <button class="dropdown-toggle" type="button" id="dropdownMenu-3" aria-expanded="false"
                     data-bs-toggle="dropdown">
                     <p>Informações Financeiras</p>
+                    <svg class="mobile-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                      <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    </svg>
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu-3">
                     <li class="dropdown-page">
@@ -247,6 +263,10 @@
                   <button class="dropdown-toggle" type="button" id="dropdownMenu-4" aria-expanded="false"
                     data-bs-toggle="dropdown">
                     <p>Serviços RI</p>
+                    <svg class="mobile-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                      <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    </svg>
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu-4">
                     <li class="dropdown-page">
@@ -273,6 +293,10 @@
                   <button class="dropdown-toggle" type="button" id="dropdownMenu-4" aria-expanded="false"
                     data-bs-toggle="dropdown">
                     <p>Contato</p>
+                    <svg class="mobile-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                      <path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    </svg>
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu-4">
                     <li class="dropdown-page">
@@ -299,31 +323,43 @@
               </div>
             </nav>
 
-            <div class="search-bar">
-              <a href="#">
-                <img src="./images/icon_search.svg" alt="Search" />
-              </a>
+            <div class="header-actions">
+              <div class="search-bar">
+                <a href="#">
+                  <img src="./images/icon_search.svg" alt="Search" />
+                </a>
 
-              <div id="searchBox">
-                <div class="container container-full">
-                  <div class="wrapper">
-                    <div class="input-group">
-                      <input type="text" class="form-control inputBusca" placeholder="Digite aqui a sua busca" />
+                <div id="searchBox">
+                  <div class="container container-full">
+                    <div class="wrapper">
+                      <div class="input-group">
+                        <input type="text" class="form-control inputBusca" placeholder="Digite aqui a sua busca" />
 
-                      <div class="input-group-append">
-                        <button type="button" class="input-group-text close-search-box" role="button">
-                          <img src="./images/icon-close.svg" alt="Close" title="Fechar Caixa de Pesquisa" />
-                        </button>
+                        <div class="input-group-append">
+                          <button type="button" class="input-group-text close-search-box" role="button">
+                            <img src="./images/icon-close.svg" alt="Close" title="Fechar Caixa de Pesquisa" />
+                          </button>
+                        </div>
                       </div>
-                    </div>
 
-                    <div class="search-help">
-                      <small> Aperte Enter para pesquisar </small>
+                      <div class="search-help">
+                        <small> Aperte Enter para pesquisar </small>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+
+              <!-- Mobile Menu Toggle -->
+              <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+              </button>
             </div>
+
+
+
           </div>
         </div>
       </header>
