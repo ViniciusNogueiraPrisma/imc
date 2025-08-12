@@ -95,57 +95,57 @@ $(document).ready(function () {
     },
   });
 
-  const swiperParceiros = new Swiper(".mySwiper-parceiros", {
-    slidesPerView: 1,
-    centeredSlides: false,
-    spaceBetween: 24,
-    loop: true,
-    spaceBetween: 16,
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-    breakpoints: {
-      480: {
-        slidesPerView: 2,
-        spaceBetween: 16,
-        centeredSlides: false,
-      },
-      768: {
-        slidesPerView: 3,
-        spaceBetween: 16,
-        centeredSlides: false,
-      },
-      992: {
-        slidesPerView: 4,
-        spaceBetween: 16,
-        centeredSlides: true,
-      },
-      1200: {
-        slidesPerView: 5,
-        spaceBetween: 16,
-        centeredSlides: true,
-      },
-    },
-    on: {
-      slideChangeTransitionEnd: function () {
-        $(".mySwiper-parceiros .swiper-slide a").removeClass("slide-active");
+  let parceirosSwiper = null;
+  function initParceirosSwiper() {
+    const parceirosEl = document.querySelector('.mySwiper-parceiros');
+    if (!parceirosEl) return;
 
-        const activeSlide = $(".mySwiper-parceiros .swiper-slide-active");
-        if (activeSlide.length) {
-          activeSlide.find("a").addClass("slide-active");
-        }
+    const nextEl = parceirosEl.querySelector('.swiper-button-next');
+    const prevEl = parceirosEl.querySelector('.swiper-button-prev');
+    const slidesCount = parceirosEl.querySelectorAll('.swiper-wrapper .swiper-slide').length || 1;
+
+    if (parceirosSwiper) {
+      try { parceirosSwiper.destroy(true, true); } catch (_) {}
+      parceirosSwiper = null;
+    }
+
+    parceirosSwiper = new Swiper(parceirosEl, {
+      // Core
+      speed: 400,
+      spaceBetween: 16,
+      slidesPerView: 1,
+      slidesPerGroup: 1,
+      initialSlide: 0,
+
+      // Loop infinito estável
+      loop: true,
+      centeredSlides: true,
+      centerInsufficientSlides: true,
+      loopedSlides: slidesCount,
+      loopAdditionalSlides: slidesCount,
+      loopedSlidesLimit: false,
+      normalizeSlideIndex: true,
+      watchOverflow: true,
+
+      // UX
+      grabCursor: true,
+      slideToClickedSlide: false,
+      watchSlidesProgress: true,
+      observer: true,
+      observeParents: true,
+
+      navigation: { nextEl, prevEl },
+
+      breakpoints: {
+        480:  { slidesPerView: 2, centeredSlides: true },
+        768:  { slidesPerView: 3, centeredSlides: true },
+        992:  { slidesPerView: 3, centeredSlides: true },
+        1200: { slidesPerView: 5, centeredSlides: true },
       },
-      init: function () {
-        setTimeout(() => {
-          const activeSlide = $(".mySwiper-parceiros .swiper-slide-active");
-          if (activeSlide.length) {
-            activeSlide.find("a").addClass("slide-active");
-          }
-        }, 100);
-      },
-    },
-  });
+    });
+  }
+
+  initParceirosSwiper();
 
   const marcasSwiper = new Swiper(".marcas-swiper", {
     effect: "fade",

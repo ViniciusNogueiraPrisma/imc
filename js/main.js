@@ -683,14 +683,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const touchY = e.touches[0].clientY;
         const touchDelta = touchY - touchStartY;
 
-        if (this.scrollTop === 0 && touchDelta > 0) {
-          e.preventDefault();
-        }
+        // Use o contêiner rolável correto: submenu aberto ou o próprio overlay
+        const targetScrollable = e.target.closest('.dropdown-menu.mobile-show');
+        const scrollContainer = targetScrollable || this;
 
-        if (
-          this.scrollTop >= this.scrollHeight - this.clientHeight &&
-          touchDelta < 0
-        ) {
+        const atTop = scrollContainer.scrollTop === 0;
+        const atBottom = scrollContainer.scrollTop >= (scrollContainer.scrollHeight - scrollContainer.clientHeight);
+
+        if ((atTop && touchDelta > 0) || (atBottom && touchDelta < 0)) {
+          // Evita o bounce do container atual sem bloquear o scroll interno
           e.preventDefault();
         }
       }

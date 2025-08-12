@@ -140,6 +140,46 @@ header {
         }
       }
 
+
+      a {
+        position: relative;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        padding: 16px 0px;
+        text-decoration: none;
+
+        &:hover {
+          p {
+            border-bottom: 1px solid var(--semantic-secondary-hover, #bf3d00);
+            background: var(--estrutura-navbar-link-canal-effect-hover,
+                $color-hover);
+            color: #e0e0e0;
+            transition: all 0.4s ease;
+          }
+        }
+
+        p {
+          margin: 0;
+          color: var(--estrutura-navbar-link-canal-link-default, #f7f7f7);
+          font-family: "Poppins";
+          font-size: rem(18);
+          font-style: normal;
+          font-weight: 600;
+          line-height: 116%;
+          transition: all 0.4s ease;
+          padding: 4px 8px;
+          border-bottom: 1px solid transparent;
+          white-space: nowrap;
+        }
+
+        &:after {
+          display: none;
+        }
+      }
+
       .dropdown-toggle {
         position: relative;
         border: none;
@@ -205,6 +245,9 @@ header {
         display: flex !important;
         flex-direction: column;
         gap: 16px;
+
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+
       }
 
       .dropdown.show .dropdown-menu {
@@ -250,6 +293,7 @@ header {
           }
         }
       }
+
 
       .dropdown-item:hover,
       .dropdown-item:focus,
@@ -635,7 +679,7 @@ header {
     }
   }
 
-  .search-bar {}
+
 
   .navigation {
     position: absolute !important;
@@ -741,7 +785,7 @@ header {
 
           &.mobile-show {
             max-height: 106px;
-            overflow-y: scroll;
+            overflow: scroll !important;
           }
         }
 
@@ -773,6 +817,8 @@ header {
           }
         }
       }
+
+
     }
 
     &:after {
@@ -845,8 +891,30 @@ header {
 
       .dropdown-item {
         font-size: 14px;
-        padding: 12px 24px;
+        padding: 16px 24px;
       }
+    }
+  }
+
+}
+
+
+.link-menu-mobile-a {
+  @media(max-width: 1200px) {
+    p {
+      font-size: 21px !important;
+    }
+  }
+
+  @media(max-width: 768px) {
+    p {
+      font-size: 16px !important;
+    }
+  }
+
+  @media(max-width: 480px) {
+    p {
+      font-size: 15px !important;
     }
   }
 }
