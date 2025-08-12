@@ -26,25 +26,22 @@ header {
   &.hide-header {
     transform: translateY(-100%);
     padding: 12px 0;
-    background: linear-gradient(
-      180deg,
-      var(--colors-primary-500, #e08022) 0%,
-      var(--colors-tertiary-500, #de2e0d) 77%
-    );
+    background: linear-gradient(180deg,
+        var(--colors-primary-500, #e08022) 0%,
+        var(--colors-tertiary-500, #de2e0d) 77%);
     background-color: #ea7425;
   }
 
   &.show-header {
     transform: translateY(0);
     padding: 12px 0;
-    background: linear-gradient(
-      180deg,
-      var(--colors-primary-500, #e08022) 0%,
-      var(--colors-tertiary-500, #de2e0d) 77%
-    );
+    background: linear-gradient(180deg,
+        var(--colors-primary-500, #e08022) 0%,
+        var(--colors-tertiary-500, #de2e0d) 77%);
 
     .logo {
       transition: all 0.3s ease;
+
       img {
         max-width: 100px !important;
         transition: all 0.3s ease;
@@ -74,6 +71,7 @@ header {
 
     .logo {
       transition: all 0.3s ease;
+
       img {
         transition: all 0.3s ease;
         width: 100%;
@@ -84,10 +82,26 @@ header {
     .navigation {
       display: flex;
       position: relative;
+      justify-content: center;
 
       .menu-items {
         display: flex;
         align-items: center;
+        max-width: 960px;
+        margin: 0 auto;
+        width: 100%;
+
+        @media(max-width: 991px) {
+          max-width: 720px;
+        }
+
+        @media(max-width: 767px) {
+          max-width: 540px;
+        }
+
+        @media(max-width: 575px) {
+          max-width: 100%;
+        }
 
         &:first-child {
           &:before {
@@ -136,10 +150,8 @@ header {
         &:hover {
           p {
             border-bottom: 1px solid var(--semantic-secondary-hover, #bf3d00);
-            background: var(
-              --estrutura-navbar-link-canal-effect-hover,
-              $color-hover
-            );
+            background: var(--estrutura-navbar-link-canal-effect-hover,
+                $color-hover);
             color: #e0e0e0;
             transition: all 0.4s ease;
           }
@@ -247,10 +259,8 @@ header {
       .dropdown.active {
         p {
           border-bottom: 1px solid var(--semantic-secondary-hover, #bf3d00);
-          background: var(
-            --estrutura-navbar-link-canal-effect-hover,
-            $color-hover
-          );
+          background: var(--estrutura-navbar-link-canal-effect-hover,
+              $color-hover);
           color: #e0e0e0;
           transition: all 0.4s ease;
         }
@@ -612,9 +622,7 @@ header {
     }
   }
 
-  .search-bar {
-    // display: none;
-  }
+  .search-bar {}
 
   .navigation {
     position: absolute !important;
@@ -719,7 +727,8 @@ header {
           gap: 0;
 
           &.mobile-show {
-            max-height: 500px;
+            max-height: 106px;
+            overflow-y: scroll;
           }
         }
 

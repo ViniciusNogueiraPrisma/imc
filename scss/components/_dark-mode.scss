@@ -5,4 +5,531 @@ body {
 body.dark-mode {
   background-color: #1a1a1a;
   color: #ffffff;
+
+  .banner-home {
+    background: #1d1d1d;
+  }
+
+  header.show-header {
+    background: #2b2b2b;
+  }
+
+  header.hide-header {
+    background: #2b2b2b;
+  }
+
+  .banner-home .banner-swiper .swiper-slide .text-slide h2:after {
+    filter: grayscale(1) brightness(2.5);
+  }
+
+  header .content-header .navigation .dropdown.active p {
+    border-bottom: 1px solid white;
+    background: unset;
+    color: #e0e0e0;
+    transition: all .4s ease;
+    border-radius: 0;
+  }
+
+  header .content-header .navigation .dropdown-item:hover,
+  header .content-header .navigation .dropdown-item:focus,
+  header .content-header .navigation .dropdown-item:active {
+    color: #6e6e6e;
+  }
+
+  header .content-header .navigation .dropdown-item:after {
+    background-color: #6e6e6e;
+  }
+
+  .banner-home .banner-swiper .main-pagination .trade-slide-link:hover {
+    background-color: #6e6e6e;
+    border-color: #6e6e6e;
+  }
+
+  #searchBox {
+    background-color: #2b2b2b;
+  }
+
+  #searchBox .input-group .close-search-box img {
+    filter: invert(1);
+  }
+
+  #searchBox .input-group {
+    border-bottom: 1px solid white;
+  }
+
+  .acessibility-bar .content-acessibility .accessibility-tools .language-tools .language-dropdown .language-menu li a.active {
+    color: #000;
+  }
+
+  .banner-home .destaques-home .container .destaques-content a:hover {
+    background-color: #6e6e6e;
+  }
+
+  .parceiros-home .swiper-slide-active a {
+    color: #000;
+  }
+
+  .parceiros-home .swiper-slide-active a:before {
+    background-color: #000;
+  }
+
+  .parceiros-home .swiper-slide-active a:after {
+    filter: grayscale(1);
+  }
+
+  .parceiros-home .btns-parceiros .trade-parceiros {
+    border-color: #fff;
+    filter: grayscale(1) brightness(20);
+  }
+
+  .parceiros-home .btns-parceiros .trade-parceiros:hover {
+    background-color: unset;
+  }
+
+  .infos-home .main-content-infos .main-itens h3 {
+    color: #fff;
+  }
+
+  .infos-home .main-content-infos .main-itens .list-itens .item-event:hover .content-event {
+    border-color: #fff;
+  }
+
+  .infos-home .main-content-infos .main-itens .list-itens .item-event:hover .date-event {
+    background: #2b2b2b;
+  }
+
+  .infos-home .main-content-infos .main-itens .list-itens .item-event:hover .content-event .texts h4 {
+    color: #000;
+  }
+
+  .infos-home .main-content-infos .main-itens .list-itens .item-event .content-event .texts a {
+    color: #000;
+  }
+
+  .link-animated:before {
+    background-color: #000;
+  }
+
+  .link-animated:after {
+    filter: grayscale(1) brightness(16.5) invert(1);
+  }
+
+  .last-link-events {
+    color: #fff;
+  }
+
+  .channels-home .main-content-channels .box-2 {
+    background: linear-gradient(90deg, #000 0%, rgba(0, 0, 0, 0) 100%), url(../../images/img-box-2-atendimento.jpg) #d3d3d3 50%/cover no-repeat;
+  }
+
+  footer {
+    background: #2b2b2b;
+
+    a,
+    p,
+    h4,
+    h5,
+    h6 {
+      color: white !important;
+      opacity: 1;
+    }
+
+    .content-footer-links a {
+      color: white !important;
+    }
+  }
+
+  .container-infos-footer {
+    background: #2b2b2b;
+  }
+
+  .last-content-footer {
+    background: #2b2b2b;
+  }
+
+  footer .content-footer .mailing .content-mailing .send-mailing:hover {
+    border-color: #fff;
+  }
+
+  footer .content-footer .mailing .content-mailing .send-mailing input {
+    &::placeholder {
+      color: #6e6e6e;
+    }
+  }
+
+  footer .content-footer .mailing .content-mailing .send-mailing input:focus {
+    border-color: #fff;
+  }
+
+  footer .content-footer .mailing .content-mailing .send-mailing:hover img {
+    filter: grayscale(1);
+  }
+
+  .voltar-topo img {
+    filter: grayscale(1);
+  }
+
+  .content-footer .logo img {
+    filter: grayscale(1) brightness(16.5);
+  }
+
+
+  .imgs-selo img {
+    filter: grayscale(1) brightness(16.5);
+  }
+
+  .logo-prisma img {
+    filter: grayscale(1) brightness(16.5);
+  }
+
+  .logo-prisma svg {
+    filter: invert(1) brightness(27.5);
+    background: white;
+  }
+
+  .container-qs .main-content-qs .box h2 {
+    color: #fff;
+  }
+
+  .qs-content .main-content-qs .box p {
+    color: #fff;
+  }
+
+  .container-qs .main-content-qs .box a {
+    color: #fff;
+  }
+
+  .timeline-qs .title-timeline h3 {
+    color: #fff;
+  }
+
+  .timeline-qs .timeline-content .timeline-text h3 {
+    color: #1a1a1a;
+  }
+
+  .timeline-qs .timeline-nav .timeline-years .track-progress {
+    background: #000;
+  }
+
+  .timeline-qs .timeline-nav .timeline-years .track-points .point-wrapper.active .point {
+    background: #000;
+  }
+
+  .timeline-qs .timeline-nav .timeline-years .track-points .point-wrapper.active .year {
+    color: #000;
+  }
+
+  .timeline-qs .timeline-nav .timeline-years .track-points .point-wrapper.passed .point {
+    background: #000;
+  }
+
+  .timeline-qs .timeline-nav .timeline-years .track-points .point-wrapper.passed .year {
+    color: #000;
+  }
+
+  .timeline-qs .timeline-nav .swiper-button-prev,
+  .timeline-qs .timeline-nav .swiper-button-next {
+    border-color: #000;
+    filter: grayscale(1) brightness(0);
+  }
+
+  .timeline-qs .timeline-nav .swiper-button-prev:hover,
+  .timeline-qs .timeline-nav .swiper-button-next:hover {
+    background: #000;
+  }
+
+  .timeline-qs .timeline-nav .timeline-years .track-points .point-wrapper:hover .year {
+    color: #000;
+  }
+
+  .container-qs .main-content-qs .box h3 {
+    color: #fff;
+  }
+
+  .container-qs .main-content-qs .box p {
+    color: #fff;
+  }
+
+  .valores-imc .title-value h3 {
+    color: #fff;
+
+  }
+
+  .valores-imc .content-valores .cards .image::after {
+    background: linear-gradient(180deg, rgba(224, 128, 34, 0.2) 0%, #3d3d3d 100%);
+  }
+
+  .valores-imc:after {
+    background: #fff;
+  }
+
+  .pilares-imc .title-pilares h2 {
+    color: #fff;
+  }
+
+  .pilares-imc .content-pilares .box .image-box::after {
+    background: linear-gradient(180deg, rgba(224, 128, 34, 0.2) 0%, #3d3d3d 100%);
+
+  }
+
+  .title-marcas h2 {
+    color: #fff;
+  }
+
+  h2 {
+    color: #fff;
+  }
+
+  h3 {
+    color: #fff;
+  }
+
+  .marcas-destaque .kfc-main-card .kfc-content .kfc-actions .btn-primary {
+    background-color: #1d1d1d;
+  }
+
+  .marcas-destaque .container-pagination .main-pagination .trade-slide-link:hover {
+    background-color: #2b2b2b;
+    border-color: #2b2b2b;
+  }
+
+  p {
+    color: #fff;
+  }
+
+  // Bootstrap table dark mode fixes
+  table {
+    color: #fff;
+    background-color: #1a1a1a !important;
+  }
+
+  table thead th {
+    background-color: #1a1a1a !important;
+    border-color: #fff !important;
+    color: #fff !important;
+  }
+
+  table tbody tr td {
+    background-color: #1a1a1a !important;
+    border-color: #fff !important;
+    color: #fff !important;
+  }
+
+  table tbody tr {
+    background-color: #1a1a1a !important;
+  }
+
+  table tbody tr:nth-child(even) {
+    background-color: #1a1a1a !important;
+  }
+
+  table tbody tr:hover {
+    background-color: #1a1a1a !important;
+  }
+
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #1a1a1a !important;
+  }
+
+  .table-dark {
+    background-color: #1a1a1a !important;
+  }
+
+  .diretoria-content .diretoria-cards .director-card:hover {
+    background-color: #2b2b2b;
+    border-color: #2b2b2b;
+  }
+
+  .filter .filter-controls .filter-button:hover {
+    background: #2b2b2b;
+    border-color: #2b2b2b;
+    box-shadow: unset !important;
+  }
+
+  .filter .filter-controls .filter-button.active {
+    background: #2b2b2b;
+    border-color: #2b2b2b;
+    box-shadow: unset !important;
+  }
+
+  .accordions-main .accordion .accordion-item .accordion-header .accordion-button:hover {
+    color: #000;
+  }
+
+  .accordions-main .accordion .accordion-item .accordion-header .accordion-button:hover span {
+    color: #000;
+  }
+
+  .accordions-main .accordion .accordion-item .accordion-header .accordion-button:hover::after {
+    color: #000;
+  }
+
+  .accordions-main .accordion .accordion-item:hover {
+    border-color: #2b2b2b;
+  }
+
+  .accordions-main .accordion .accordion-item:has(.accordion-button:not(.collapsed)) {
+    border-color: #2b2b2b;
+
+  }
+
+  .accordions-main .accordion .accordion-item .accordion-collapse .accordion-body .accordion-content-list .accordion-item-row:hover {
+    border-color: #2b2b2b;
+  }
+
+  .accordions-main .accordion .accordion-item .accordion-collapse .accordion-body .accordion-content-list .accordion-item-row:hover .item-date {
+    color: #000;
+  }
+
+  .accordions-main .accordion .accordion-item .accordion-collapse .accordion-body .accordion-content-list .accordion-item-row:hover .item-title {
+    color: #000;
+  }
+
+  .accordions-main .accordion .accordion-item .accordion-collapse .accordion-body .accordion-content-list .accordion-item-row:hover .item-download img {
+    filter: grayscale(1) brightness(0);
+  }
+
+  .accordions-main .accordion .accordion-item .accordion-header .accordion-button:not(.collapsed) .accordion-title {
+    color: #000;
+  }
+
+  .accordions-main .accordion .accordion-item .accordion-header .accordion-button:not(.collapsed)::after {
+    color: #000;
+  }
+
+  .atas-lists-main .title-atas h2 {
+    color: #fff;
+  }
+
+  .atas-content-list .atas-item-row:hover {
+    border-color: #2b2b2b;
+  }
+
+  .atas-content-list .atas-item-row:hover .item-date {
+    color: #000;
+  }
+
+  .atas-content-list .atas-item-row:hover .item-title {
+    color: #000;
+  }
+
+  .atas-content-list .atas-item-row:hover .item-download img {
+    filter: grayscale(1) brightness(0);
+  }
+
+  .atas-content-list .atas-item-row:hover .item-download:hover img {
+    filter: grayscale(1) brightness(0);
+  }
+
+  .container-eventos .title-proximos-eventos {
+    color: #fff;
+  }
+
+  .container-eventos .ui-datepicker-header .ui-corner-all .ui-icon {
+    border-color: #fff;
+  }
+
+  .container-eventos .ui-datepicker-header .ui-corner-all .ui-icon::after {
+    filter: grayscale(1) brightness(0) invert(1);
+  }
+
+  .container-eventos .ui-datepicker-header .ui-corner-all .ui-icon:hover {
+    background-color: #2b2b2b;
+  }
+
+  .container-eventos .ui-datepicker-calendar tbody td a {
+    color: #fff;
+  }
+
+  .container-eventos .ui-datepicker-calendar thead {
+    border-color: #fff;
+  }
+
+  .container-eventos .ui-datepicker-calendar thead th {
+    background-color: #2b2b2b !important;
+  }
+
+  .container-eventos .legendas-calendario span {
+    color: #fff;
+  }
+
+  .container-eventos .ui-datepicker-header .ui-datepicker-title span {
+    color: #fff;
+  }
+
+  .list-calendar-items .list-calendar:hover {
+    border-color: #2b2b2b;
+  }
+
+  .list-calendar-items .list-calendar:hover .date-calendar span {
+    color: #000;
+  }
+
+  .list-calendar-items .list-calendar:hover .title-list h3 {
+    color: #000;
+  }
+
+  .list-calendar-items .list-calendar:hover .title-list span {
+    color: #000;
+  }
+
+  .container-eventos .eventos-realizados-section .title-eventos-realizados h2 {
+    color: #fff;
+  }
+
+  .atend-container .title-canais-atendimento h2 {
+    color: #fff;
+  }
+
+  .atend-container .content-atend .box-atend a {
+    background-color: #2b2b2b;
+  }
+
+  .atend-container .content-atend .box-atend:hover {
+    border-color: #2b2b2b;
+  }
+
+  .atend-container .content-atend .box-atend:hover .text-box h6 {
+    color: #000;
+  }
+
+  .atend-container .content-atend .box-atend:hover .logo-card img {
+    filter: grayscale(1) !important;
+  }
+
+  .container-mailing .content-mailing .form .title-form h3 {
+    color: #fff;
+  }
+
+  .container-mailing .content-mailing .form .inputs .input-group:hover label {
+    color: #fff;
+  }
+
+  .container-mailing .content-mailing .form .last-validation p {
+    color: #fff;
+  }
+
+  .container-mailing .content-mailing .form .last-validation label {
+    color: #fff;
+  }
+
+  .btn-secondary-imc {
+    color: #fff;
+  }
+
+  .btn-primary-imc {
+    background-color: #2b2b2b;
+  }
+
+  .container-glossario .glossario-content .glossario-section .glossario-terms .glossario-term .term-definition {
+    color: #fff;
+  }
+
+  .container-vem-imc .content-vem-ser-imc .title-ser-imc h2 {
+    color: #fff;
+  }
+
+  .container-vem-imc .content-vem-ser-imc .cards-ser-imc .cards .title span {
+    color: #000;
+  }
 }
