@@ -20,7 +20,7 @@ header {
     padding 0.3s ease-in-out;
 
   @media (max-width: 1200px) {
-    padding-top: 12px;
+    padding-top: 64px;
   }
 
   &.hide-header {
@@ -43,7 +43,6 @@ header {
       transition: all 0.3s ease;
 
       img {
-        max-width: 100px !important;
         transition: all 0.3s ease;
       }
     }
@@ -55,11 +54,10 @@ header {
     background-color: transparent;
 
     @media (max-width: 1200px) {
-      padding-top: 12px;
+      padding-top: 64px;
 
       .content-header {
         padding-bottom: 12px;
-        border-bottom: 1px solid #f2f2f2;
       }
     }
   }
@@ -76,6 +74,10 @@ header {
         transition: all 0.3s ease;
         width: 100%;
         max-width: 100%;
+
+        @media (max-width: 1200px) {
+          max-width: 80%;
+        }
       }
     }
 
@@ -359,16 +361,17 @@ header {
   width: 100%;
   z-index: 1000;
 
-  @media (max-width: 1200px) {
-    display: none;
-  }
-
   .content-acessibility {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     .link-ri {
+
+      @media (max-width: 1200px) {
+        display: none;
+      }
+
       a {
         text-decoration: none;
         color: #fcfcfc;
@@ -385,8 +388,16 @@ header {
         width: 100%;
         max-width: 360px;
 
+        @media (max-width: 1200px) {
+          max-width: 220px !important;
+        }
+
         .swiper-slide {
-          width: auto !important;
+          width: 154px !important;
+
+          @media (max-width: 1200px) {
+            width: 100% !important;
+          }
 
           .ticker-item {
             color: #fcfcfc;
@@ -420,14 +431,16 @@ header {
       align-items: center;
       gap: 40px;
 
-      @media (max-width: 1200px) {
-        display: none;
-      }
+
 
       .tools {
         display: flex;
         align-items: center;
         gap: 8px;
+
+        @media (max-width: 1200px) {
+          display: none;
+        }
 
         a {
           position: relative;
@@ -819,7 +832,7 @@ header {
   }
 
   .navigation {
-    padding: 50px 16px 30px;
+    padding: 118px 16px 30px;
 
     .menu-items .dropdown {
       .dropdown-toggle {
@@ -832,7 +845,7 @@ header {
 
       .dropdown-item {
         font-size: 14px;
-        padding: 10px 0;
+        padding: 12px 24px;
       }
     }
   }

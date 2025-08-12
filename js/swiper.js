@@ -37,21 +37,22 @@ $(document).ready(function () {
   initDestaquesSwiper();
   window.addEventListener("resize", initDestaquesSwiper);
   const tickersSwiper = new Swiper(".tickers-swiper", {
+    // CONFIGURAÇÃO PADRÃO (MOBILE)
     slidesPerView: 1,
     spaceBetween: 32,
-    loop: true,
+    allowTouchMove: true, // MOBILE: permite swipe
     autoplay: {
-      delay: 2000,
+      delay: 3000,
       disableOnInteraction: false,
     },
     breakpoints: {
       768: {
+        // DESKTOP: >= 768px
         slidesPerView: 2,
-        spaceBetween: 32,
-      },
-      480: {
-        slidesPerView: 2,
-        spaceBetween: 32,
+        spaceBetween: 16,
+        allowTouchMove: false, // BLOQUEIA navegação no desktop
+        allowSlideNext: false,
+        allowSlidePrev: false,
       },
     },
   });

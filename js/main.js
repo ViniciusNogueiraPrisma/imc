@@ -1,4 +1,98 @@
+AOS.init({
+  duration: 800,
+  easing: "ease-in-out",
+  once: true,
+});
+
+// Controle de Fonte - Versão Simples
 document.addEventListener("DOMContentLoaded", function () {
+  let currentFontSize = parseInt(localStorage.getItem("fontLevel")) || 100; // 100 = 100%
+  
+  const increaseBtn = document.getElementById("increaseFont");
+  const decreaseBtn = document.getElementById("decreaseFont");
+
+  function applyFontSize() {
+    document.body.style.fontSize = currentFontSize + "%";
+  }
+
+  // Aplica tamanho salvo
+  if (currentFontSize !== 100) {
+    applyFontSize();
+  }
+
+  if (increaseBtn) {
+    increaseBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (currentFontSize < 130) { // máximo 130%
+        currentFontSize += 10;
+        applyFontSize();
+        localStorage.setItem("fontLevel", currentFontSize);
+        updateButtons();
+        console.log(`Font size: ${currentFontSize}%`);
+      }
+    });
+  }
+
+  if (decreaseBtn) {
+    decreaseBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (currentFontSize > 80) { // mínimo 80%
+        currentFontSize -= 10;
+        applyFontSize();
+        localStorage.setItem("fontLevel", currentFontSize);
+        updateButtons();
+        console.log(`Font size: ${currentFontSize}%`);
+      }
+    });
+  }
+
+  function updateButtons() {
+    if (increaseBtn) {
+      increaseBtn.style.opacity = currentFontSize >= 130 ? "0.5" : "1";
+    }
+    if (decreaseBtn) {
+      decreaseBtn.style.opacity = currentFontSize <= 80 ? "0.5" : "1";
+    }
+  }
+
+  updateButtons();
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  function initTableScrollShadows() {
+    const tableContainers = document.querySelectorAll('.table-responsive');
+    
+    tableContainers.forEach(function(container) {
+      function updateScrollShadows() {
+        const scrollLeft = container.scrollLeft;
+        const scrollWidth = container.scrollWidth;
+        const clientWidth = container.clientWidth;
+        
+        container.classList.remove('scrolled-left', 'scrolled-right');
+        
+        if (scrollWidth > clientWidth) {
+          if (scrollLeft > 10) {
+            container.classList.add('scrolled-left');
+          }
+          
+          if (scrollLeft < scrollWidth - clientWidth - 10) {
+            container.classList.add('scrolled-right');
+          }
+        }
+      }
+      
+      setTimeout(updateScrollShadows, 100);
+      
+      container.addEventListener('scroll', updateScrollShadows);
+      
+      window.addEventListener('resize', function() {
+        setTimeout(updateScrollShadows, 100);
+      });
+    });
+  }
+  
+  initTableScrollShadows();
+
   const languageToggle = document.querySelector(".language-toggle");
   const languageMenu = document.querySelector(".language-menu");
   const currentLang = document.querySelector(".current-lang");
@@ -59,11 +153,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-AOS.init({
-  duration: 800,
-  easing: "ease-in-out",
-  once: true,
-});
+
 
 $(document).ready(function () {
   $(".dropdown").hover(
@@ -257,9 +347,7 @@ function handleScroll() {
 
 if (!isGlossarioPage()) {
   window.addEventListener("scroll", handleScroll);
-  console.log("Header scroll habilitado (página não é glossário)");
 } else {
-  console.log("Header scroll desabilitado (página do glossário detectada)");
 
   if (header) {
     header.classList.add("at-top");
@@ -469,7 +557,6 @@ document.addEventListener("DOMContentLoaded", function () {
   updateFilterButton();
 });
 
-// === SINGLE STRUCTURE MOBILE/DESKTOP MENU ===
 document.addEventListener("DOMContentLoaded", function () {
   const mobileMenuToggle = document.getElementById("mobileMenuToggle");
   const navigation = document.querySelector(".navigation");
@@ -478,12 +565,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const dropdownItems = document.querySelectorAll(".dropdown-item");
   const body = document.body;
 
-  // Check if we're in mobile mode
   function isMobileMode() {
     return window.innerWidth <= 1200;
   }
 
-  // Toggle Mobile Menu
   function toggleMobileMenu() {
     const isActive = mobileMenuToggle.classList.contains("active");
 
@@ -505,7 +590,6 @@ document.addEventListener("DOMContentLoaded", function () {
     navigation.classList.remove("mobile-active");
     body.style.overflow = "";
 
-    // Close all accordions when menu closes
     if (isMobileMode()) {
       dropdownToggles.forEach((toggle) => {
         const dropdownMenu = toggle.nextElementSibling;
@@ -515,7 +599,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Mobile Menu Toggle Click
   if (mobileMenuToggle) {
     mobileMenuToggle.addEventListener("click", function (e) {
       e.preventDefault();
@@ -524,7 +607,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Close menu when clicking outside (mobile only)
   if (navigation) {
     navigation.addEventListener("click", function (e) {
       if (isMobileMode() && e.target === navigation) {
@@ -533,18 +615,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Handle dropdown behavior - SAME ELEMENTS, different behavior based on screen size
   dropdownToggles.forEach((toggle) => {
     toggle.addEventListener("click", function (e) {
       if (isMobileMode()) {
-        // Mobile accordion behavior
+
         e.preventDefault();
         e.stopPropagation();
 
         const dropdownMenu = this.nextElementSibling;
         const isExpanded = this.getAttribute("aria-expanded") === "true";
 
-        // Close all other accordions
         dropdownToggles.forEach((otherToggle) => {
           if (otherToggle !== this) {
             const otherMenu = otherToggle.nextElementSibling;
@@ -553,7 +633,6 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         });
 
-        // Toggle current accordion
         if (isExpanded) {
           this.setAttribute("aria-expanded", "false");
           dropdownMenu.classList.remove("mobile-show");
@@ -562,15 +641,12 @@ document.addEventListener("DOMContentLoaded", function () {
           dropdownMenu.classList.add("mobile-show");
         }
       }
-      // Desktop: Let normal hover behavior handle dropdowns
     });
   });
 
-  // Close menu when clicking on links (mobile only)
   dropdownItems.forEach((item) => {
     item.addEventListener("click", function () {
       if (isMobileMode()) {
-        // Add small delay to allow navigation
         setTimeout(() => {
           closeMobileMenu();
         }, 100);
@@ -578,18 +654,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Close menu on ESC key
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && navigation.classList.contains("mobile-active")) {
       closeMobileMenu();
     }
   });
 
-  // Handle window resize
   window.addEventListener("resize", function () {
     if (window.innerWidth > 1200) {
       closeMobileMenu();
-      // Reset all mobile states
       dropdownToggles.forEach((toggle) => {
         const dropdownMenu = toggle.nextElementSibling;
         toggle.setAttribute("aria-expanded", "false");
@@ -598,7 +671,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Add touch event handling for better mobile experience
   let touchStartY = 0;
 
   if (navigation) {
@@ -613,12 +685,10 @@ document.addEventListener("DOMContentLoaded", function () {
         const touchY = e.touches[0].clientY;
         const touchDelta = touchY - touchStartY;
 
-        // If trying to scroll up when already at top, prevent default
         if (this.scrollTop === 0 && touchDelta > 0) {
           e.preventDefault();
         }
 
-        // If trying to scroll down when at bottom, prevent default
         if (
           this.scrollTop >= this.scrollHeight - this.clientHeight &&
           touchDelta < 0

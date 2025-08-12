@@ -142,6 +142,10 @@
       grid-template-columns: repeat(1, 1fr);
     }
 
+    @media (max-width: 991px) {
+      padding: 64px 0px;
+    }
+
     .box {
       display: flex;
       flex-direction: column;
@@ -166,6 +170,14 @@
         font-style: normal;
         font-weight: 400;
         line-height: 120%;
+
+        @media (max-width: 991px) {
+          font-size: 22px;
+        }
+
+        @media (max-width: 768px) {
+          font-size: 20px;
+        }
       }
 
       h2 {
@@ -179,6 +191,14 @@
         font-style: normal;
         font-weight: 400;
         line-height: 120%;
+
+        @media (max-width: 991px) {
+          font-size: 26px;
+        }
+
+        @media (max-width: 768px) {
+          font-size: 24px;
+        }
       }
 
       p {
@@ -192,6 +212,10 @@
         font-style: normal;
         font-weight: 400;
         line-height: 140%;
+
+        @media (max-width: 991px) {
+          font-size: 16px;
+        }
       }
 
       a {
@@ -205,6 +229,10 @@
         display: flex;
         gap: 8px;
         align-items: center;
+
+        @media (max-width: 991px) {
+          font-size: 14px;
+        }
 
         img {
           width: 32px;
@@ -238,6 +266,14 @@
       font-style: normal;
       font-weight: 400;
       line-height: 120%;
+
+      @media (max-width: 991px) {
+        font-size: 28px;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 24px;
+      }
     }
   }
 
@@ -345,6 +381,10 @@
           line-height: 120%;
           transition: all 0.3s ease;
           transform: translateY(0);
+
+          @media (max-width: 991px) {
+            font-size: 22px;
+          }
         }
       }
     }
@@ -365,6 +405,10 @@
       font-style: normal;
       font-weight: 400;
       line-height: 120%;
+
+      @media (max-width: 991px) {
+        font-size: 24px;
+      }
     }
   }
 
@@ -599,6 +643,10 @@
         font-style: normal;
         font-weight: 700;
         line-height: 120%;
+
+        @media (max-width: 991px) {
+          font-size: 28px;
+        }
       }
 
       p {
@@ -609,6 +657,10 @@
         font-style: normal;
         font-weight: 400;
         line-height: 140%;
+
+        @media (max-width: 991px) {
+          font-size: 14px;
+        }
       }
 
       .kfc-actions {
@@ -636,6 +688,10 @@
           font-weight: 700;
           line-height: 116%;
 
+          @media (max-width: 991px) {
+            font-size: 16px;
+          }
+
           &:hover {
             background: #d96f09;
             color: #fcfcfc;
@@ -656,6 +712,10 @@
           text-decoration: none;
           line-height: 116%;
           transition: all 0.4s ease;
+
+          @media (max-width: 991px) {
+            font-size: 16px;
+          }
 
           &:hover {
             transition: all 0.4s ease;
@@ -902,7 +962,6 @@
     }
 
     .table-responsive {
-      overflow-x: auto;
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 
@@ -1304,9 +1363,15 @@
 .table-main {
   padding: 112px 0px;
 
+  @media (max-width: 991px) {
+    padding: 64px 0px;
+  }
+
   .table {
     margin-bottom: 0;
   }
+
+
 
   .table-note {
     margin-top: 10px;
@@ -1337,6 +1402,10 @@
           line-height: 140%;
 
           text-align: end;
+
+          @media (max-width: 991px) {
+            font-size: 16px;
+          }
 
           &:nth-child(1) {
             width: 25%;
@@ -1382,6 +1451,10 @@
           font-weight: 400;
           line-height: 140%;
           text-align: end;
+
+          @media (max-width: 991px) {
+            font-size: 16px;
+          }
         }
       }
     }
@@ -1390,6 +1463,10 @@
 
 .p-112 {
   padding: 112px 0px;
+
+  @media (max-width: 1200px) {
+    padding: 64px 0px;
+  }
 }
 
 .diretoria-content {
@@ -1777,6 +1854,10 @@
             font-style: normal;
             font-weight: 400;
             line-height: 140%;
+
+            @media (max-width: 991px) {
+              font-size: 16px;
+            }
           }
 
           &:hover {
@@ -1903,6 +1984,10 @@
       font-style: normal;
       font-weight: 400;
       line-height: 120%;
+
+      @media (max-width: 991px) {
+        font-size: 28px;
+      }
     }
   }
 }
@@ -2132,6 +2217,10 @@
     font-style: normal;
     font-weight: 400;
     line-height: 120%;
+
+    @media (max-width: 991px) {
+      font-size: 28px;
+    }
   }
 
   .cc-calendar {
@@ -2149,6 +2238,14 @@
   .list-calendario {
     padding: 0;
     margin-top: 64px;
+
+    @media (max-width: 991px) {
+      margin-top: 32px;
+    }
+
+    @media (max-width: 768px) {
+      margin-top: 24px;
+    }
   }
 
   .eventos-realizados-section {
@@ -2165,6 +2262,10 @@
         font-style: normal;
         font-weight: 400;
         line-height: 120%;
+
+        @media (max-width: 991px) {
+          font-size: 22px;
+        }
       }
     }
 
@@ -2350,6 +2451,10 @@
         font-style: normal;
         font-weight: 400;
         line-height: 120%;
+
+        @media (max-width: 991px) {
+          font-size: 22px;
+        }
 
         &:nth-child(1) {
           &::after {
@@ -2878,6 +2983,10 @@
           font-style: normal;
           font-weight: 400;
           line-height: 120%;
+
+          @media (max-width: 991px) {
+            font-size: 22px;
+          }
         }
       }
 
@@ -2984,6 +3093,10 @@
           font-weight: 400;
           line-height: 140%;
           margin-bottom: 10px;
+
+          @media (max-width: 991px) {
+            font-size: 14px;
+          }
         }
 
         label {
@@ -2994,6 +3107,10 @@
           font-style: normal;
           font-weight: 400;
           line-height: 140%;
+
+          @media (max-width: 991px) {
+            font-size: 14px;
+          }
         }
 
         .d-check:not(:last-child) {
@@ -3046,6 +3163,10 @@
         font-style: normal;
         font-weight: 700;
         line-height: 140%;
+
+        @media (max-width: 991px) {
+          font-size: 16px;
+        }
       }
 
       a {
@@ -3057,6 +3178,10 @@
         font-style: normal;
         font-weight: 400;
         line-height: 140%;
+
+        @media (max-width: 991px) {
+          font-size: 14px;
+        }
       }
 
       p {
@@ -3067,6 +3192,10 @@
         font-style: normal;
         font-weight: 400;
         line-height: 140%;
+
+        @media (max-width: 991px) {
+          font-size: 14px;
+        }
       }
     }
   }
@@ -3084,6 +3213,11 @@
       font-style: normal;
       font-weight: 400;
       line-height: 120%;
+
+      @media (max-width: 991px) {
+        font-size: 28px;
+      }
+
     }
   }
 
@@ -3207,6 +3341,10 @@
         font-style: normal;
         font-weight: 400;
         line-height: 120%;
+
+        @media (max-width: 991px) {
+          font-size: 28px;
+        }
       }
     }
 
@@ -3242,6 +3380,10 @@
             font-style: normal;
             font-weight: 700;
             line-height: 120%;
+
+            @media (max-width: 991px) {
+              font-size: 22px;
+            }
           }
 
           span {
@@ -3252,6 +3394,8 @@
             font-style: normal;
             font-weight: 700;
             line-height: 140%;
+
+        
           }
         }
 
