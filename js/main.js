@@ -4,9 +4,8 @@ AOS.init({
   once: true,
 });
 
-// Controle de Fonte - Versão Simples
 document.addEventListener("DOMContentLoaded", function () {
-  let currentFontSize = parseInt(localStorage.getItem("fontLevel")) || 100; // 100 = 100%
+  let currentFontSize = parseInt(localStorage.getItem("fontLevel")) || 100;
   
   const increaseBtn = document.getElementById("increaseFont");
   const decreaseBtn = document.getElementById("decreaseFont");
@@ -15,7 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.style.fontSize = currentFontSize + "%";
   }
 
-  // Aplica tamanho salvo
   if (currentFontSize !== 100) {
     applyFontSize();
   }
@@ -23,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (increaseBtn) {
     increaseBtn.addEventListener("click", function (e) {
       e.preventDefault();
-      if (currentFontSize < 130) { // máximo 130%
+      if (currentFontSize < 130) {
         currentFontSize += 10;
         applyFontSize();
         localStorage.setItem("fontLevel", currentFontSize);
@@ -36,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (decreaseBtn) {
     decreaseBtn.addEventListener("click", function (e) {
       e.preventDefault();
-      if (currentFontSize > 80) { // mínimo 80%
+      if (currentFontSize > 80) {
         currentFontSize -= 10;
         applyFontSize();
         localStorage.setItem("fontLevel", currentFontSize);

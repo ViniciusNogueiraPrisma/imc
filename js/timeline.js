@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Verificar se os elementos da timeline existem
   const timelineContainer = document.querySelector('.timeline-slider');
   if (!timelineContainer) {
     console.warn('Timeline container not found');
@@ -38,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    // Adiciona eventos de clique nos pontos
     points.forEach((point, index) => {
       point.addEventListener('click', () => {
         const slideIndex = parseInt(point.dataset.index);
@@ -47,16 +45,13 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!isNaN(slideIndex) && slideIndex >= 0 && slideIndex < swiper.slides.length) {
           swiper.slideTo(slideIndex);
           
-          // Log para debug da ligação entre slide e ano
           console.log(`Navegando para slide ${slideIndex} (${slideYear})`);
         }
       });
     });
 
-    // Inicializa o estado com o primeiro slide ativo
     updateTimeline(swiper);
     
-    // Garante que a barra de progresso comece no primeiro ponto
     setTimeout(() => {
       updateTimeline(swiper);
     }, 100);
@@ -73,49 +68,37 @@ document.addEventListener('DOMContentLoaded', function() {
     const trackPoints = document.querySelector('.track-points');
     const timelineTrack = document.querySelector('.timeline-track');
     
-    // Log para debug
     console.log(`Timeline Update: Slide ${currentIndex}, Year ${currentYear}`);
     
-    // Calcula a barra de progresso baseada na posição real dos pontos
     if (progressBar && points.length > 1) {
       const activePoint = document.querySelector(`.point-wrapper[data-year="${currentYear}"]`);
       const firstPoint = points[0];
       
       if (activePoint && firstPoint) {
-        // Espaçamento fixo: 80px por ponto + 40px de margem = 120px entre centros dos pontos
-        const pointSpacing = 120; // 80px width + 40px margin
-        // A barra começa no centro do primeiro ponto (40px padding + 40px para o centro = 80px)
-        // Mas agora a barra está posicionada em left: 40px, então adicionamos 40px ao cálculo
+        const pointSpacing = 120;
         const progressWidth = 40 + (currentIndex * pointSpacing);
         
         progressBar.style.width = `${progressWidth}px`;
       }
     } else if (progressBar && points.length === 1) {
-      // Se só há um ponto, não mostra barra
       progressBar.style.width = '0px';
     }
     
-    // Atualiza estados dos pontos baseado no ano
     points.forEach((point) => {
       const pointYear = point.dataset.year;
       const pointIndex = parseInt(point.dataset.index);
       
-      // Remove todas as classes de estado
       point.classList.remove('active', 'passed');
       
       if (pointIndex < currentIndex) {
-        // Estados passados
         point.classList.add('passed');
       } else if (pointYear === currentYear) {
-        // Estado ativo baseado no ano
         point.classList.add('active');
         
-        // Scroll automático para o ponto ativo
         scrollToActivePoint(point);
       }
     });
 
-    // Atualiza state dos botões
     updateNavigationButtons(swiper);
   }
 
@@ -127,23 +110,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const pointRect = activePoint.getBoundingClientRect();
     const scrollLeft = timelineTrack.scrollLeft;
     
-    // Calcula a posição para manter o ponto ativo visível
     const pointLeft = pointRect.left - trackRect.left + scrollLeft;
     const pointRight = pointLeft + pointRect.width;
     const trackWidth = trackRect.width;
     
     let targetScroll = scrollLeft;
     
-    // Se o ponto está fora da view à direita
     if (pointRight > trackWidth + scrollLeft) {
-      targetScroll = pointRight - trackWidth + 40; // +40px de margem
+      targetScroll = pointRight - trackWidth + 40;
     }
-    // Se o ponto está fora da view à esquerda
     else if (pointLeft < scrollLeft) {
-      targetScroll = Math.max(0, pointLeft - 40); // -40px de margem
+      targetScroll = Math.max(0, pointLeft - 40);
     }
     
-    // Scroll suave
     if (targetScroll !== scrollLeft) {
       timelineTrack.scrollTo({
         left: targetScroll,
@@ -157,11 +136,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const nextButton = document.querySelector('.swiper-button-next');
     
     if (prevButton && nextButton) {
-      // Reset classes
       prevButton.classList.remove('swiper-button-disabled');
       nextButton.classList.remove('swiper-button-disabled');
       
-      // Adiciona classe disabled quando necessário
       if (swiper.isBeginning) {
         prevButton.classList.add('swiper-button-disabled');
       }
@@ -172,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Adiciona navegação por teclado
+
   document.addEventListener('keydown', function(e) {
     if (!timelineSlider) return;
     
@@ -185,7 +162,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Função para ir para um slide específico (pode ser chamada externamente)
   window.goToTimelineSlide = function(index) {
     if (timelineSlider && index >= 0 && index < timelineSlider.slides.length) {
       timelineSlider.slideTo(index);

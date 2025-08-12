@@ -37,20 +37,18 @@ $(document).ready(function () {
   initDestaquesSwiper();
   window.addEventListener("resize", initDestaquesSwiper);
   const tickersSwiper = new Swiper(".tickers-swiper", {
-    // CONFIGURAÇÃO PADRÃO (MOBILE)
     slidesPerView: 1,
     spaceBetween: 32,
-    allowTouchMove: true, // MOBILE: permite swipe
+    allowTouchMove: true,
     autoplay: {
       delay: 3000,
       disableOnInteraction: false,
     },
     breakpoints: {
       768: {
-        // DESKTOP: >= 768px
         slidesPerView: 2,
         spaceBetween: 16,
-        allowTouchMove: false, // BLOQUEIA navegação no desktop
+        allowTouchMove: false,
         allowSlideNext: false,
         allowSlidePrev: false,
       },
