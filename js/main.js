@@ -6,7 +6,7 @@ AOS.init({
 
 document.addEventListener("DOMContentLoaded", function () {
   let currentFontSize = parseInt(localStorage.getItem("fontLevel")) || 100;
-  
+
   const increaseBtn = document.getElementById("increaseFont");
   const decreaseBtn = document.getElementById("decreaseFont");
 
@@ -58,37 +58,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   function initTableScrollShadows() {
-    const tableContainers = document.querySelectorAll('.table-responsive');
-    
-    tableContainers.forEach(function(container) {
+    const tableContainers = document.querySelectorAll(".table-responsive");
+
+    tableContainers.forEach(function (container) {
       function updateScrollShadows() {
         const scrollLeft = container.scrollLeft;
         const scrollWidth = container.scrollWidth;
         const clientWidth = container.clientWidth;
-        
-        container.classList.remove('scrolled-left', 'scrolled-right');
-        
+
+        container.classList.remove("scrolled-left", "scrolled-right");
+
         if (scrollWidth > clientWidth) {
           if (scrollLeft > 10) {
-            container.classList.add('scrolled-left');
+            container.classList.add("scrolled-left");
           }
-          
+
           if (scrollLeft < scrollWidth - clientWidth - 10) {
-            container.classList.add('scrolled-right');
+            container.classList.add("scrolled-right");
           }
         }
       }
-      
+
       setTimeout(updateScrollShadows, 100);
-      
-      container.addEventListener('scroll', updateScrollShadows);
-      
-      window.addEventListener('resize', function() {
+
+      container.addEventListener("scroll", updateScrollShadows);
+
+      window.addEventListener("resize", function () {
         setTimeout(updateScrollShadows, 100);
       });
     });
   }
-  
+
   initTableScrollShadows();
 
   const languageToggle = document.querySelector(".language-toggle");
@@ -150,8 +150,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-
-
 
 $(document).ready(function () {
   $(".dropdown").hover(
@@ -224,7 +222,16 @@ document.addEventListener("DOMContentLoaded", function () {
     threshold: 0.1,
   };
 
-  function activateLetter(letter) {
+  let isManualClick = false;
+
+  function activateLetter(letter, isManual = false) {
+    if (isManual) {
+      isManualClick = true;
+      setTimeout(() => {
+        isManualClick = false;
+      }, 1000); // Reset after 1 second
+    }
+
     letterLinks.forEach((link) => {
       if (!link.classList.contains("disabled")) {
         link.classList.remove("active");
@@ -239,7 +246,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) {
+      if (entry.isIntersecting && !isManualClick) {
         const letter = entry.target.getAttribute("data-letter");
         if (letter) {
           activateLetter(letter);
@@ -276,7 +283,7 @@ document.addEventListener("DOMContentLoaded", function () {
           behavior: "smooth",
         });
 
-        activateLetter(letter);
+        activateLetter(letter, true);
       }
     });
   });
@@ -346,13 +353,155 @@ function handleScroll() {
 if (!isGlossarioPage()) {
   window.addEventListener("scroll", handleScroll);
 } else {
-
   if (header) {
     header.classList.add("at-top");
     header.classList.remove("hide-header", "show-header");
     header.style.position = "absolute";
   }
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+  const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+  const navigation = document.querySelector(".navigation");
+  const dropdownToggles = document.querySelectorAll(".dropdown-toggle");
+  const dropdownMenus = document.querySelectorAll(".dropdown-menu");
+  const dropdownItems = document.querySelectorAll(".dropdown-item");
+  const body = document.body;
+
+  function isMobileMode() {
+    return window.innerWidth <= 1200;
+  }
+
+  function toggleMobileMenu() {
+    const isActive = mobileMenuToggle.classList.contains("active");
+
+    if (isActive) {
+      closeMobileMenu();
+    } else {
+      openMobileMenu();
+    }
+  }
+
+  function openMobileMenu() {
+    mobileMenuToggle.classList.add("active");
+    navigation.classList.add("mobile-active");
+    body.style.overflow = "hidden";
+  }
+
+  function closeMobileMenu() {
+    mobileMenuToggle.classList.remove("active");
+    navigation.classList.remove("mobile-active");
+    body.style.overflow = "";
+
+    if (isMobileMode()) {
+      dropdownToggles.forEach((toggle) => {
+        const dropdownMenu = toggle.nextElementSibling;
+        toggle.setAttribute("aria-expanded", "false");
+        dropdownMenu.classList.remove("mobile-show");
+      });
+    }
+  }
+
+  if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMobileMenu();
+    });
+  }
+
+  if (navigation) {
+    navigation.addEventListener("click", function (e) {
+      if (isMobileMode() && e.target === navigation) {
+        closeMobileMenu();
+      }
+    });
+  }
+
+  dropdownToggles.forEach((toggle) => {
+    toggle.addEventListener("click", function (e) {
+      if (isMobileMode()) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const dropdownMenu = this.nextElementSibling;
+        const isExpanded = this.getAttribute("aria-expanded") === "true";
+
+        dropdownToggles.forEach((otherToggle) => {
+          if (otherToggle !== this) {
+            const otherMenu = otherToggle.nextElementSibling;
+            otherToggle.setAttribute("aria-expanded", "false");
+            otherMenu.classList.remove("mobile-show");
+          }
+        });
+
+        if (isExpanded) {
+          this.setAttribute("aria-expanded", "false");
+          dropdownMenu.classList.remove("mobile-show");
+        } else {
+          this.setAttribute("aria-expanded", "true");
+          dropdownMenu.classList.add("mobile-show");
+        }
+      }
+    });
+  });
+
+  dropdownItems.forEach((item) => {
+    item.addEventListener("click", function () {
+      if (isMobileMode()) {
+        setTimeout(() => {
+          closeMobileMenu();
+        }, 100);
+      }
+    });
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && navigation.classList.contains("mobile-active")) {
+      closeMobileMenu();
+    }
+  });
+
+  window.addEventListener("resize", function () {
+    if (window.innerWidth > 1200) {
+      closeMobileMenu();
+      dropdownToggles.forEach((toggle) => {
+        const dropdownMenu = toggle.nextElementSibling;
+        toggle.setAttribute("aria-expanded", "false");
+        dropdownMenu.classList.remove("mobile-show");
+      });
+    }
+  });
+
+  let touchStartY = 0;
+
+  if (navigation) {
+    navigation.addEventListener("touchstart", function (e) {
+      if (isMobileMode() && navigation.classList.contains("mobile-active")) {
+        touchStartY = e.touches[0].clientY;
+      }
+    });
+
+    navigation.addEventListener("touchmove", function (e) {
+      if (isMobileMode() && navigation.classList.contains("mobile-active")) {
+        const touchY = e.touches[0].clientY;
+        const touchDelta = touchY - touchStartY;
+
+        const targetScrollable = e.target.closest(".dropdown-menu.mobile-show");
+        const scrollContainer = targetScrollable || this;
+
+        const atTop = scrollContainer.scrollTop === 0;
+        const atBottom =
+          scrollContainer.scrollTop >=
+          scrollContainer.scrollHeight - scrollContainer.clientHeight;
+
+        if ((atTop && touchDelta > 0) || (atBottom && touchDelta < 0)) {
+          e.preventDefault();
+        }
+      }
+    });
+  }
+});
 
 document.addEventListener("DOMContentLoaded", function () {
   const filterButton = document.querySelector("[data-filter-toggle]");
@@ -553,150 +702,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   updateFilterButton();
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  const mobileMenuToggle = document.getElementById("mobileMenuToggle");
-  const navigation = document.querySelector(".navigation");
-  const dropdownToggles = document.querySelectorAll(".dropdown-toggle");
-  const dropdownMenus = document.querySelectorAll(".dropdown-menu");
-  const dropdownItems = document.querySelectorAll(".dropdown-item");
-  const body = document.body;
-
-  function isMobileMode() {
-    return window.innerWidth <= 1200;
-  }
-
-  function toggleMobileMenu() {
-    const isActive = mobileMenuToggle.classList.contains("active");
-
-    if (isActive) {
-      closeMobileMenu();
-    } else {
-      openMobileMenu();
-    }
-  }
-
-  function openMobileMenu() {
-    mobileMenuToggle.classList.add("active");
-    navigation.classList.add("mobile-active");
-    body.style.overflow = "hidden";
-  }
-
-  function closeMobileMenu() {
-    mobileMenuToggle.classList.remove("active");
-    navigation.classList.remove("mobile-active");
-    body.style.overflow = "";
-
-    if (isMobileMode()) {
-      dropdownToggles.forEach((toggle) => {
-        const dropdownMenu = toggle.nextElementSibling;
-        toggle.setAttribute("aria-expanded", "false");
-        dropdownMenu.classList.remove("mobile-show");
-      });
-    }
-  }
-
-  if (mobileMenuToggle) {
-    mobileMenuToggle.addEventListener("click", function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      toggleMobileMenu();
-    });
-  }
-
-  if (navigation) {
-    navigation.addEventListener("click", function (e) {
-      if (isMobileMode() && e.target === navigation) {
-        closeMobileMenu();
-      }
-    });
-  }
-
-  dropdownToggles.forEach((toggle) => {
-    toggle.addEventListener("click", function (e) {
-      if (isMobileMode()) {
-
-        e.preventDefault();
-        e.stopPropagation();
-
-        const dropdownMenu = this.nextElementSibling;
-        const isExpanded = this.getAttribute("aria-expanded") === "true";
-
-        dropdownToggles.forEach((otherToggle) => {
-          if (otherToggle !== this) {
-            const otherMenu = otherToggle.nextElementSibling;
-            otherToggle.setAttribute("aria-expanded", "false");
-            otherMenu.classList.remove("mobile-show");
-          }
-        });
-
-        if (isExpanded) {
-          this.setAttribute("aria-expanded", "false");
-          dropdownMenu.classList.remove("mobile-show");
-        } else {
-          this.setAttribute("aria-expanded", "true");
-          dropdownMenu.classList.add("mobile-show");
-        }
-      }
-    });
-  });
-
-  dropdownItems.forEach((item) => {
-    item.addEventListener("click", function () {
-      if (isMobileMode()) {
-        setTimeout(() => {
-          closeMobileMenu();
-        }, 100);
-      }
-    });
-  });
-
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && navigation.classList.contains("mobile-active")) {
-      closeMobileMenu();
-    }
-  });
-
-  window.addEventListener("resize", function () {
-    if (window.innerWidth > 1200) {
-      closeMobileMenu();
-      dropdownToggles.forEach((toggle) => {
-        const dropdownMenu = toggle.nextElementSibling;
-        toggle.setAttribute("aria-expanded", "false");
-        dropdownMenu.classList.remove("mobile-show");
-      });
-    }
-  });
-
-  let touchStartY = 0;
-
-  if (navigation) {
-    navigation.addEventListener("touchstart", function (e) {
-      if (isMobileMode() && navigation.classList.contains("mobile-active")) {
-        touchStartY = e.touches[0].clientY;
-      }
-    });
-
-    navigation.addEventListener("touchmove", function (e) {
-      if (isMobileMode() && navigation.classList.contains("mobile-active")) {
-        const touchY = e.touches[0].clientY;
-        const touchDelta = touchY - touchStartY;
-
-        // Use o contêiner rolável correto: submenu aberto ou o próprio overlay
-        const targetScrollable = e.target.closest('.dropdown-menu.mobile-show');
-        const scrollContainer = targetScrollable || this;
-
-        const atTop = scrollContainer.scrollTop === 0;
-        const atBottom = scrollContainer.scrollTop >= (scrollContainer.scrollHeight - scrollContainer.clientHeight);
-
-        if ((atTop && touchDelta > 0) || (atBottom && touchDelta < 0)) {
-          // Evita o bounce do container atual sem bloquear o scroll interno
-          e.preventDefault();
-        }
-      }
-    });
-  }
 });
 
 document.addEventListener("DOMContentLoaded", function () {

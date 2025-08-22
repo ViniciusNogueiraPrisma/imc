@@ -20,9 +20,11 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(180deg,
-        rgba(29, 29, 29, 0) -37%,
-        rgba(29, 29, 29, 0.9) 99%);
+    background: linear-gradient(
+      180deg,
+      rgba(29, 29, 29, 0) -37%,
+      rgba(29, 29, 29, 0.9) 99%
+    );
     z-index: 1;
   }
 
@@ -308,9 +310,11 @@
           left: 0;
           width: 100%;
           height: 100%;
-          background: linear-gradient(180deg,
-              rgba(26, 26, 26, 0.2) 0%,
-              rgba(26, 26, 26, 0.7) 100%);
+          background: linear-gradient(
+            180deg,
+            rgba(26, 26, 26, 0.2) 0%,
+            rgba(26, 26, 26, 0.7) 100%
+          );
           pointer-events: none;
           z-index: 1;
           opacity: 1;
@@ -324,9 +328,11 @@
           left: 0;
           width: 100%;
           height: 100%;
-          background: linear-gradient(180deg,
-              rgba(224, 128, 34, 0.2) 0%,
-              #e08022 100%);
+          background: linear-gradient(
+            180deg,
+            rgba(224, 128, 34, 0.2) 0%,
+            #e08022 100%
+          );
           pointer-events: none;
           z-index: 2;
           opacity: 0;
@@ -455,9 +461,11 @@
           left: 0;
           width: 100%;
           height: 100%;
-          background: linear-gradient(180deg,
-              rgba(224, 128, 34, 0.2) 0%,
-              #e08022 100%);
+          background: linear-gradient(
+            180deg,
+            rgba(224, 128, 34, 0.2) 0%,
+            #e08022 100%
+          );
           opacity: 0;
           transition: opacity 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
           z-index: 2;
@@ -775,9 +783,11 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg,
-            rgba(220, 46, 13, 0.8) 0%,
-            rgba(220, 46, 13, 0.2) 100%);
+        background: linear-gradient(
+          90deg,
+          rgba(220, 46, 13, 0.8) 0%,
+          rgba(220, 46, 13, 0.2) 100%
+        );
         z-index: 1;
       }
 
@@ -1119,9 +1129,11 @@
             border-top: 2px solid #ea7425;
 
             &:hover {
-              background: linear-gradient(135deg,
-                  #f8f9fa 0%,
-                  #e9ecef 100%) !important;
+              background: linear-gradient(
+                135deg,
+                #f8f9fa 0%,
+                #e9ecef 100%
+              ) !important;
               transform: none !important;
               box-shadow: none !important;
             }
@@ -1324,7 +1336,6 @@
     }
 
     .acionaria-notes {
-
       .notes-section h4,
       .download-section h4 {
         font-size: 20px;
@@ -1370,8 +1381,6 @@
   .table {
     margin-bottom: 0;
   }
-
-
 
   .table-note {
     margin-top: 10px;
@@ -2429,7 +2438,8 @@
       }
 
       &.ui-datepicker-prev {
-        .ui-icon {}
+        .ui-icon {
+        }
       }
 
       &.ui-datepicker-next {
@@ -3217,7 +3227,6 @@
       @media (max-width: 991px) {
         font-size: 28px;
       }
-
     }
   }
 
@@ -3394,8 +3403,6 @@
             font-style: normal;
             font-weight: 700;
             line-height: 140%;
-
-
           }
         }
 
@@ -3423,7 +3430,7 @@
           }
 
           @media (max-width: 768px) {
-            grid-template-columns: repeat(1, 1fr);
+            // grid-template-columns: repeat(1, 1fr);
           }
 
           img {

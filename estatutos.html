@@ -141,11 +141,11 @@
         <header class="header">
           <div class="container container-full">
             <div class="content-header">
-             <div class="logo">
-               <a href="/">
-                 <img src="images/logotipo-imc.png" alt="Logo IMC" />
-               </a>
-             </div>
+              <div class="logo">
+                <a href="/">
+                  <img src="images/logotipo-imc.png" alt="Logo IMC" />
+                </a>
+              </div>
 
               <nav class="navigation">
                 <div class="menu-items">
@@ -459,7 +459,83 @@
     </div>
 
     <div class="estatutos-container p-112">
-      <div class="container container-full">
+      <div class="container">
+        <div class="accordions-main">
+          <div class="accordion" id="CotacoesAccordion">
+            <div
+              class="accordion-item aos-init aos-animate"
+              data-aos="fade-up"
+              data-aos-duration="200"
+            >
+              <h2 class="accordion-header" id="headingCotacoes">
+                <button
+                  aria-controls="collapseCotacoes"
+                  aria-expanded="false"
+                  class="accordion-button collapsed"
+                  data-bs-target="#collapsecotacoes"
+                  data-bs-toggle="collapse"
+                  type="button"
+                >
+                  <span class="accordion-title">Cotações e Gráficos</span>
+                </button>
+              </h2>
+
+              <div
+                aria-labelledby="headingCotacoes"
+                class="accordion-collapse collapse"
+                data-bs-parent="#CotacoesAccordion"
+                id="collapseCotacoes"
+              >
+                <div class="accordion-body">
+                  <iframe
+                    frameborder="0"
+                    height="710"
+                    src="https://ri.enfoque.com.br/RIWeb/Empresas/data?token=8E7D19524673824CD12C6EF80C12D36877929541C886EE95A5E9BF382E70BFC7003A02DAE6403AD8943B849FBF4A22BC"
+                    width="100%"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="accordion-item aos-init aos-animate"
+              data-aos="fade-up"
+              data-aos-duration="200"
+            >
+              <h2 class="accordion-header" id="headingCotacoes2">
+                <button
+                  aria-controls="collapseCotacoes2"
+                  aria-expanded="false"
+                  class="accordion-button collapsed"
+                  data-bs-target="#collapsecotacoes2"
+                  data-bs-toggle="collapse"
+                  type="button"
+                >
+                  <span class="accordion-title">Cotações e Gráficos</span>
+                </button>
+              </h2>
+
+              <div
+                aria-labelledby="headingCotacoes2"
+                class="accordion-collapse collapse"
+                data-bs-parent="#CotacoesAccordion"
+                id="collapseCotacoes2"
+              >
+                <div class="accordion-body">
+                  <iframe
+                    frameborder="0"
+                    height="850"
+                    src="https://ri.enfoque.com.br/RIWeb/Empresas/hist?token=8E7D19524673824CD12C6EF80C12D36877929541C886EE95A5E9BF382E70BFC7003A02DAE6403AD8943B849FBF4A22BC"
+                    width="100%"
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="container container-full">
         <div class="accordion-content">
           <div class="filter" data-aos="fade-up" data-aos-duration="200">
             <div class="filter-controls">
@@ -724,7 +800,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
 
     <div class="channels-home">
@@ -988,7 +1064,7 @@
 
     <script src="js/main.js"></script>
     <script src="js/swiper.js"></script>
-   
+
     <script src="js/timeline.js"></script>
   </body>
 </html>

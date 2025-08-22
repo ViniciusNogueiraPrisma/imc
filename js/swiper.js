@@ -95,57 +95,46 @@ $(document).ready(function () {
     },
   });
 
-  let parceirosSwiper = null;
-  function initParceirosSwiper() {
-    const parceirosEl = document.querySelector('.mySwiper-parceiros');
-    if (!parceirosEl) return;
-
-    const nextEl = parceirosEl.querySelector('.swiper-button-next');
-    const prevEl = parceirosEl.querySelector('.swiper-button-prev');
-    const slidesCount = parceirosEl.querySelectorAll('.swiper-wrapper .swiper-slide').length || 1;
-
-    if (parceirosSwiper) {
-      try { parceirosSwiper.destroy(true, true); } catch (_) {}
-      parceirosSwiper = null;
-    }
-
-    parceirosSwiper = new Swiper(parceirosEl, {
-      // Core
-      speed: 400,
-      spaceBetween: 16,
-      slidesPerView: 1,
-      slidesPerGroup: 1,
-      initialSlide: 0,
-
-      // Loop infinito estável
-      loop: true,
-      centeredSlides: true,
-      centerInsufficientSlides: true,
-      loopedSlides: slidesCount,
-      loopAdditionalSlides: slidesCount,
-      loopedSlidesLimit: false,
-      normalizeSlideIndex: true,
-      watchOverflow: true,
-
-      // UX
-      grabCursor: true,
-      slideToClickedSlide: false,
-      watchSlidesProgress: true,
-      observer: true,
-      observeParents: true,
-
-      navigation: { nextEl, prevEl },
-
-      breakpoints: {
-        480:  { slidesPerView: 2, centeredSlides: true },
-        768:  { slidesPerView: 3, centeredSlides: true },
-        992:  { slidesPerView: 3, centeredSlides: true },
-        1200: { slidesPerView: 5, centeredSlides: true },
+  const parceirosSwiper = new Swiper(".mySwiper-parceiros", {
+    slidesPerView: "auto",
+    spaceBetween: 20,
+    centeredSlides: true,
+    speed: 600,
+    allowTouchMove: true,
+    grabCursor: true,
+    // autoplay: {
+    //   delay: 3000,
+    //   disableOnInteraction: false,
+    // },
+    breakpoints: {
+      // 480: {
+      //   slidesPerView: ,
+      //   spaceBetween: 20,
+      // },
+      768: {
+        slidesPerView: 1,
+        spaceBetween: 20,
       },
-    });
-  }
-
-  initParceirosSwiper();
+      992: {
+        slidesPerView: 4,
+        spaceBetween: 20,
+      },
+      1200: {
+        slidesPerView: 5,
+        spaceBetween: 20,
+      },
+    },
+    navigation: {
+      nextEl: ".mySwiper-parceiros .swiper-button-next",
+      prevEl: ".mySwiper-parceiros .swiper-button-prev",
+    },
+    on: {
+      init: function () {
+        // força o loop a iniciar no primeiro slide corretamente
+        this.slideToLoop(0, 0, false);
+      },
+    },
+  });
 
   const marcasSwiper = new Swiper(".marcas-swiper", {
     effect: "fade",
