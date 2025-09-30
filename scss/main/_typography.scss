@@ -1,4 +1,4 @@
-$font-family-base: "Arimo", sans-serif;
+$font-family-base: "Nasalization", sans-serif;
 
 @function rem($pixels, $base: 16) {
   @return #{$pixels / $base}rem;

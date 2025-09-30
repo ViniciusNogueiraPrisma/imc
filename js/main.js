@@ -1,10 +1,47 @@
+// Initialize Locomotive Scroll
+let scroll;
+
+function initLocomotiveScroll() {
+  scroll = new LocomotiveScroll({
+    el: document.querySelector('[data-scroll-container]'),
+    smooth: true,
+    multiplier: 1,
+    class: 'is-revealed',
+    scrollbarContainer: false,
+    lerp: 0.1,
+    smartphone: {
+      smooth: true
+    },
+    tablet: {
+      smooth: true
+    }
+  });
+
+  // Update scroll on window resize
+  window.addEventListener('resize', () => {
+    scroll.update();
+  });
+}
+
+// Initialize AOS with Locomotive Scroll integration
 AOS.init({
   duration: 800,
   easing: "ease-in-out",
   once: true,
+  offset: 100,
 });
 
+// Update AOS on Locomotive Scroll update
+if (scroll) {
+  scroll.on('scroll', () => {
+    AOS.refresh();
+  });
+}
+
 document.addEventListener("DOMContentLoaded", function () {
+  // Initialize Locomotive Scroll
+  initLocomotiveScroll();
+  
   let currentFontSize = parseInt(localStorage.getItem("fontLevel")) || 100;
 
   const increaseBtn = document.getElementById("increaseFont");
@@ -26,7 +63,6 @@ document.addEventListener("DOMContentLoaded", function () {
         applyFontSize();
         localStorage.setItem("fontLevel", currentFontSize);
         updateButtons();
-        console.log(`Font size: ${currentFontSize}%`);
       }
     });
   }
@@ -39,7 +75,6 @@ document.addEventListener("DOMContentLoaded", function () {
         applyFontSize();
         localStorage.setItem("fontLevel", currentFontSize);
         updateButtons();
-        console.log(`Font size: ${currentFontSize}%`);
       }
     });
   }
@@ -57,44 +92,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  function initTableScrollShadows() {
-    const tableContainers = document.querySelectorAll(".table-responsive");
-
-    tableContainers.forEach(function (container) {
-      function updateScrollShadows() {
-        const scrollLeft = container.scrollLeft;
-        const scrollWidth = container.scrollWidth;
-        const clientWidth = container.clientWidth;
-
-        container.classList.remove("scrolled-left", "scrolled-right");
-
-        if (scrollWidth > clientWidth) {
-          if (scrollLeft > 10) {
-            container.classList.add("scrolled-left");
-          }
-
-          if (scrollLeft < scrollWidth - clientWidth - 10) {
-            container.classList.add("scrolled-right");
-          }
-        }
-      }
-
-      setTimeout(updateScrollShadows, 100);
-
-      container.addEventListener("scroll", updateScrollShadows);
-
-      window.addEventListener("resize", function () {
-        setTimeout(updateScrollShadows, 100);
-      });
-    });
-  }
-
-  initTableScrollShadows();
-
   const languageToggle = document.querySelector(".language-toggle");
   const languageMenu = document.querySelector(".language-menu");
-  const currentLang = document.querySelector(".current-lang");
-  const languageLinks = document.querySelectorAll(".language-menu a");
 
   languageToggle.addEventListener("click", function (e) {
     e.stopPropagation();
@@ -107,62 +106,24 @@ document.addEventListener("DOMContentLoaded", function () {
     languageMenu.classList.remove("show");
   });
 
+  const languageLinks = document.querySelectorAll(".language-menu a");
+
   languageLinks.forEach((link) => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      languageLinks.forEach((l) => l.classList.remove("active"));
-      this.classList.add("active");
-      const lang = this.getAttribute("data-lang");
-      currentLang.textContent = lang.toUpperCase();
+    link.addEventListener("click", function () {
       languageToggle.classList.remove("active");
       languageMenu.classList.remove("show");
-      console.log("Language changed to:", lang);
     });
   });
 
   const toggleMode = document.querySelector(".toggle-mode");
-  const increaseFont = document.querySelector(".increase-font");
-  const decreaseFont = document.querySelector(".decrease-font");
-
-  let currentFontSize = 16;
-  const minFontSize = 12;
-  const maxFontSize = 24;
-  const originalFontSize = 16;
 
   toggleMode.addEventListener("click", function (e) {
     e.preventDefault();
     document.body.classList.toggle("dark-mode");
   });
-
-  increaseFont.addEventListener("click", function (e) {
-    e.preventDefault();
-    if (currentFontSize < maxFontSize) {
-      currentFontSize += 2;
-      document.documentElement.style.fontSize = currentFontSize + "px";
-    }
-  });
-
-  decreaseFont.addEventListener("click", function (e) {
-    e.preventDefault();
-    if (currentFontSize > minFontSize) {
-      currentFontSize -= 2;
-      document.documentElement.style.fontSize = currentFontSize + "px";
-    }
-  });
 });
 
 $(document).ready(function () {
-  $(".dropdown").hover(
-    function () {
-      $(this).addClass("show active");
-      $(this).find(".dropdown-menu").addClass("show");
-    },
-    function () {
-      $(this).removeClass("show active");
-      $(this).find(".dropdown-menu").removeClass("show");
-    }
-  );
-
   const searchButton = $(".search-bar a");
   const searchBox = $("#searchBox");
   const closeSearchBox = $(".close-search-box");
@@ -170,6 +131,7 @@ $(document).ready(function () {
   searchButton.on("click", function (e) {
     e.preventDefault();
     searchBox.toggleClass("active");
+    $("body").toggleClass("open-menu", searchBox.hasClass("active"));
     if (searchBox.hasClass("active")) {
       searchBox.find("input").focus();
     }
@@ -177,195 +139,20 @@ $(document).ready(function () {
 
   closeSearchBox.on("click", function () {
     searchBox.removeClass("active");
+    $("body").removeClass("open-menu");
   });
 
   $(document).on("click", function (e) {
     if (!$(e.target).closest("#searchBox, .search-bar").length) {
       searchBox.removeClass("active");
+      $("body").removeClass("open-menu");
     }
   });
 });
-
-document.addEventListener("DOMContentLoaded", function () {
-  const glossarioContainer = document.querySelector(".container-glossario");
-  if (!glossarioContainer) return;
-
-  const letterLinks = document.querySelectorAll(".letter-link");
-  const glossarioSections = document.querySelectorAll(".glossario-section");
-
-  if (letterLinks.length === 0 || glossarioSections.length === 0) return;
-
-  const availableLetters = new Set();
-  glossarioSections.forEach((section) => {
-    const letter = section.getAttribute("data-letter");
-    if (letter) {
-      availableLetters.add(letter);
-    }
-  });
-
-  letterLinks.forEach((link) => {
-    const letter = link.getAttribute("data-letter");
-    if (!availableLetters.has(letter)) {
-      link.classList.add("disabled");
-      link.style.pointerEvents = "none";
-    }
-  });
-
-  console.log(
-    "Letras disponíveis no glossário:",
-    Array.from(availableLetters).sort()
-  );
-
-  const observerOptions = {
-    root: null,
-    rootMargin: "-120px 0px -50% 0px",
-    threshold: 0.1,
-  };
-
-  let isManualClick = false;
-
-  function activateLetter(letter, isManual = false) {
-    if (isManual) {
-      isManualClick = true;
-      setTimeout(() => {
-        isManualClick = false;
-      }, 1000); // Reset after 1 second
-    }
-
-    letterLinks.forEach((link) => {
-      if (!link.classList.contains("disabled")) {
-        link.classList.remove("active");
-      }
-    });
-
-    const currentLink = document.querySelector(`[data-letter="${letter}"]`);
-    if (currentLink && !currentLink.classList.contains("disabled")) {
-      currentLink.classList.add("active");
-    }
-  }
-
-  const sectionObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting && !isManualClick) {
-        const letter = entry.target.getAttribute("data-letter");
-        if (letter) {
-          activateLetter(letter);
-        }
-      }
-    });
-  }, observerOptions);
-
-  glossarioSections.forEach((section) => {
-    sectionObserver.observe(section);
-  });
-
-  letterLinks.forEach((link) => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      if (this.classList.contains("disabled")) {
-        return;
-      }
-
-      const letter = this.getAttribute("data-letter");
-      const targetSection = document.querySelector(
-        `#letter-${letter.toLowerCase()}`
-      );
-
-      if (targetSection) {
-        const headerHeight = document.querySelector(
-          ".glossario-alphabet-header"
-        ).offsetHeight;
-        const targetPosition = targetSection.offsetTop - headerHeight - 20;
-
-        window.scrollTo({
-          top: targetPosition,
-          behavior: "smooth",
-        });
-
-        activateLetter(letter, true);
-      }
-    });
-  });
-
-  function checkInitialPosition() {
-    const scrollTop = window.pageYOffset;
-    const headerHeight = document.querySelector(
-      ".glossario-alphabet-header"
-    ).offsetHeight;
-
-    for (let i = 0; i < glossarioSections.length; i++) {
-      const section = glossarioSections[i];
-      const sectionTop = section.offsetTop - headerHeight - 50;
-      const sectionBottom = sectionTop + section.offsetHeight;
-
-      if (scrollTop >= sectionTop && scrollTop < sectionBottom) {
-        const letter = section.getAttribute("data-letter");
-        activateLetter(letter);
-        break;
-      }
-    }
-  }
-
-  setTimeout(checkInitialPosition, 100);
-});
-
-const header = document.querySelector("header");
-let lastScrollTop = 0;
-
-function isGlossarioPage() {
-  const currentUrl = window.location.href;
-  const pathname = window.location.pathname;
-
-  return (
-    currentUrl.includes("glossario.html") ||
-    pathname.includes("glossario.html") ||
-    pathname.endsWith("/glossario") ||
-    pathname.endsWith("/glossario/")
-  );
-}
-
-function handleScroll() {
-  if (isGlossarioPage()) {
-    return;
-  }
-
-  const currentScroll = window.scrollY;
-
-  if (currentScroll === 0) {
-    header.classList.remove("hide-header", "show-header");
-    header.classList.add("at-top");
-  } else {
-    header.classList.remove("at-top");
-
-    if (currentScroll > lastScrollTop) {
-      header.classList.remove("show-header");
-      header.classList.add("hide-header");
-    } else {
-      header.classList.remove("hide-header");
-      header.classList.add("show-header");
-    }
-  }
-
-  lastScrollTop = currentScroll;
-}
-
-if (!isGlossarioPage()) {
-  window.addEventListener("scroll", handleScroll);
-} else {
-  if (header) {
-    header.classList.add("at-top");
-    header.classList.remove("hide-header", "show-header");
-    header.style.position = "absolute";
-  }
-}
 
 document.addEventListener("DOMContentLoaded", function () {
   const mobileMenuToggle = document.getElementById("mobileMenuToggle");
   const navigation = document.querySelector(".navigation");
-  const dropdownToggles = document.querySelectorAll(".dropdown-toggle");
-  const dropdownMenus = document.querySelectorAll(".dropdown-menu");
-  const dropdownItems = document.querySelectorAll(".dropdown-item");
   const body = document.body;
 
   function isMobileMode() {
@@ -386,6 +173,11 @@ document.addEventListener("DOMContentLoaded", function () {
     mobileMenuToggle.classList.add("active");
     navigation.classList.add("mobile-active");
     body.style.overflow = "hidden";
+
+    const logoImg = document.querySelector(".logo img");
+    if (logoImg) {
+      logoImg.style.filter = "none";
+    }
   }
 
   function closeMobileMenu() {
@@ -393,12 +185,9 @@ document.addEventListener("DOMContentLoaded", function () {
     navigation.classList.remove("mobile-active");
     body.style.overflow = "";
 
-    if (isMobileMode()) {
-      dropdownToggles.forEach((toggle) => {
-        const dropdownMenu = toggle.nextElementSibling;
-        toggle.setAttribute("aria-expanded", "false");
-        dropdownMenu.classList.remove("mobile-show");
-      });
+    const logoImg = document.querySelector(".logo img");
+    if (logoImg) {
+      logoImg.style.filter = "";
     }
   }
 
@@ -418,44 +207,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  dropdownToggles.forEach((toggle) => {
-    toggle.addEventListener("click", function (e) {
-      if (isMobileMode()) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        const dropdownMenu = this.nextElementSibling;
-        const isExpanded = this.getAttribute("aria-expanded") === "true";
-
-        dropdownToggles.forEach((otherToggle) => {
-          if (otherToggle !== this) {
-            const otherMenu = otherToggle.nextElementSibling;
-            otherToggle.setAttribute("aria-expanded", "false");
-            otherMenu.classList.remove("mobile-show");
-          }
-        });
-
-        if (isExpanded) {
-          this.setAttribute("aria-expanded", "false");
-          dropdownMenu.classList.remove("mobile-show");
-        } else {
-          this.setAttribute("aria-expanded", "true");
-          dropdownMenu.classList.add("mobile-show");
-        }
-      }
-    });
-  });
-
-  dropdownItems.forEach((item) => {
-    item.addEventListener("click", function () {
-      if (isMobileMode()) {
-        setTimeout(() => {
-          closeMobileMenu();
-        }, 100);
-      }
-    });
-  });
-
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && navigation.classList.contains("mobile-active")) {
       closeMobileMenu();
@@ -465,340 +216,208 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("resize", function () {
     if (window.innerWidth > 1200) {
       closeMobileMenu();
-      dropdownToggles.forEach((toggle) => {
-        const dropdownMenu = toggle.nextElementSibling;
-        toggle.setAttribute("aria-expanded", "false");
-        dropdownMenu.classList.remove("mobile-show");
-      });
+    }
+  });
+});
+
+const header = document.querySelector("header");
+let lastScrollTop = 0;
+
+function handleScroll() {
+  const currentScroll = window.scrollY;
+
+  if (currentScroll === 0) {
+    header.classList.remove("hide-header", "show-header");
+    header.classList.add("at-top");
+  } else {
+    header.classList.remove("at-top");
+
+    if (currentScroll > lastScrollTop) {
+      header.classList.remove("show-header");
+      header.classList.add("hide-header");
+    } else {
+      header.classList.remove("hide-header");
+      header.classList.add("show-header");
+    }
+  }
+
+  lastScrollTop = currentScroll;
+}
+
+window.addEventListener("scroll", handleScroll);
+
+function initTextCarousel() {
+  const titleSlide = document.querySelector(".title-slide");
+  if (!titleSlide) return;
+
+  const texts = titleSlide.querySelectorAll("h1");
+  if (texts.length === 0) return;
+
+  let currentIndex = 0;
+
+  function showNextText() {
+    const currentText = texts[currentIndex];
+    const nextIndex = (currentIndex + 1) % texts.length;
+    const nextText = texts[nextIndex];
+
+    currentText.classList.remove("active");
+    currentText.classList.add("slide-up");
+
+    nextText.classList.add("active");
+
+    setTimeout(() => {
+      currentText.classList.remove("slide-up");
+      currentText.style.transform = "";
+      currentText.style.opacity = "";
+
+      currentIndex = nextIndex;
+    }, 800);
+  }
+
+  texts.forEach((text, index) => {
+    if (index === 0) {
+      text.classList.add("active");
+      text.style.transform = "";
+      text.style.opacity = "";
+    } else {
+      text.style.transform = "";
+      text.style.opacity = "";
     }
   });
 
-  let touchStartY = 0;
+  setInterval(showNextText, 3000);
+}
 
-  if (navigation) {
-    navigation.addEventListener("touchstart", function (e) {
-      if (isMobileMode() && navigation.classList.contains("mobile-active")) {
-        touchStartY = e.touches[0].clientY;
-      }
-    });
-
-    navigation.addEventListener("touchmove", function (e) {
-      if (isMobileMode() && navigation.classList.contains("mobile-active")) {
-        const touchY = e.touches[0].clientY;
-        const touchDelta = touchY - touchStartY;
-
-        const targetScrollable = e.target.closest(".dropdown-menu.mobile-show");
-        const scrollContainer = targetScrollable || this;
-
-        const atTop = scrollContainer.scrollTop === 0;
-        const atBottom =
-          scrollContainer.scrollTop >=
-          scrollContainer.scrollHeight - scrollContainer.clientHeight;
-
-        if ((atTop && touchDelta > 0) || (atBottom && touchDelta < 0)) {
-          e.preventDefault();
-        }
-      }
-    });
-  }
-});
+document.addEventListener("DOMContentLoaded", initTextCarousel);
 
 document.addEventListener("DOMContentLoaded", function () {
-  const filterButton = document.querySelector("[data-filter-toggle]");
-  const filterOptions = document.querySelector("[data-filter-options]");
-  const filterItems = document.querySelectorAll("[data-filter-item]");
-  const filterSelects = document.querySelectorAll(".filter-select select");
+  const atuacaoSection = document.querySelector(".atuacao-home");
+  const boxes = document.querySelectorAll(".box-atuacao .box");
 
-  let isFilterOpen = false;
+  if (!atuacaoSection || !boxes.length) return;
 
-  function toggleFilters() {
-    isFilterOpen = !isFilterOpen;
+  let currentTimeout = null;
+  let currentLayer = "before";
+  let autoplayInterval = null;
+  let currentBoxIndex = 0;
+  let isUserInteracting = false;
 
-    if (isFilterOpen) {
-      filterButton.classList.add("active");
-      filterOptions.classList.add("show");
+  function activateBox(box) {
+    const bgImage = box.dataset.bg;
+    if (!bgImage) return;
 
-      filterItems.forEach((item, index) => {
-        setTimeout(() => {
-          item.classList.add("animate-in");
-        }, 100 + index * 100);
-      });
+    const fullPath =
+      bgImage.startsWith("http") || bgImage.startsWith("/")
+        ? bgImage
+        : `../${bgImage}`;
+
+    boxes.forEach((b) => b.classList.remove("active"));
+    box.classList.add("active");
+
+    if (currentLayer === "before") {
+      atuacaoSection.style.setProperty(
+        "--bg-before",
+        `linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url("${fullPath}")`
+      );
+      atuacaoSection.classList.add("show-before");
+      atuacaoSection.classList.remove("show-after");
+      currentLayer = "after";
     } else {
-      filterButton.classList.remove("active");
+      atuacaoSection.style.setProperty(
+        "--bg-after",
+        `linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url("${fullPath}")`
+      );
+      atuacaoSection.classList.add("show-after");
+      atuacaoSection.classList.remove("show-before");
+      currentLayer = "before";
+    }
+  }
 
-      filterItems.forEach((item) => {
-        item.classList.remove("animate-in");
-      });
+  function deactivateAllBoxes() {
+    boxes.forEach((b) => b.classList.remove("active"));
+    atuacaoSection.classList.remove("show-before", "show-after");
+  }
 
-      setTimeout(() => {
-        filterOptions.classList.remove("show");
+  function startAutoplay() {
+    if (autoplayInterval) clearInterval(autoplayInterval);
+
+    autoplayInterval = setInterval(() => {
+      if (!isUserInteracting) {
+        activateBox(boxes[currentBoxIndex]);
+        currentBoxIndex = (currentBoxIndex + 1) % boxes.length;
+      }
+    }, 5000);
+  }
+
+  boxes.forEach((box, index) => {
+    box.addEventListener("mouseenter", function () {
+      isUserInteracting = true;
+
+      if (currentTimeout) {
+        clearTimeout(currentTimeout);
+        currentTimeout = null;
+      }
+
+      currentBoxIndex = index;
+      activateBox(box);
+    });
+
+    box.addEventListener("mouseleave", function () {
+      currentTimeout = setTimeout(() => {
+        isUserInteracting = false;
+        deactivateAllBoxes();
       }, 200);
-    }
-  }
-
-  if (filterButton) {
-    filterButton.addEventListener("click", function (e) {
-      e.preventDefault();
-      toggleFilters();
-    });
-  }
-
-  document.addEventListener("click", function (e) {
-    if (!e.target.closest(".filter-controls") && isFilterOpen) {
-      toggleFilters();
-    }
-  });
-
-  function filterContent(filters) {
-    const contentItems = document.querySelectorAll(
-      ".content-item, .document-item, .accordion-item"
-    );
-
-    contentItems.forEach((item) => {
-      let shouldShow = true;
-
-      if (filters.ano) {
-        const itemYear =
-          item.getAttribute("data-year") ||
-          item.querySelector("[data-year]")?.getAttribute("data-year");
-        if (itemYear && itemYear !== filters.ano) {
-          shouldShow = false;
-        }
-      }
-
-      if (filters.tipo) {
-        const itemType =
-          item.getAttribute("data-type") ||
-          item.querySelector("[data-type]")?.getAttribute("data-type");
-        if (itemType && itemType !== filters.tipo) {
-          shouldShow = false;
-        }
-      }
-
-      if (filters.data) {
-      }
-
-      if (shouldShow) {
-        item.style.display = "";
-        item.style.opacity = "1";
-        item.style.transform = "translateY(0)";
-      } else {
-        item.style.opacity = "0";
-        item.style.transform = "translateY(-10px)";
-        setTimeout(() => {
-          if (item.style.opacity === "0") {
-            item.style.display = "none";
-          }
-        }, 300);
-      }
-    });
-  }
-
-  filterSelects.forEach((select) => {
-    select.addEventListener("change", function () {
-      if (this.value) {
-        this.style.color = "#3b3b3b";
-        this.style.fontWeight = "500";
-      } else {
-        this.style.color = "#6e6e6e";
-        this.style.fontWeight = "400";
-      }
-
-      applyFilters();
-    });
-
-    select.addEventListener("focus", function () {
-      const svg = this.parentElement.querySelector("svg");
-      if (svg) {
-        svg.style.color = "#ea7425";
-      }
-    });
-
-    select.addEventListener("blur", function () {
-      const svg = this.parentElement.querySelector("svg");
-      if (svg) {
-        svg.style.color = "#6e6e6e";
-      }
     });
   });
 
-  function clearAllFilters() {
-    filterSelects.forEach((select) => {
-      select.value = "";
-      select.style.color = "#6e6e6e";
-      select.style.fontWeight = "400";
-    });
-
-    const contentItems = document.querySelectorAll(
-      ".content-item, .document-item, .accordion-item"
-    );
-    contentItems.forEach((item) => {
-      item.style.display = "";
-      item.style.opacity = "1";
-      item.style.transform = "translateY(0)";
-    });
-
-    if (isFilterOpen) {
-      toggleFilters();
-    }
-  }
-
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") {
-      if (isFilterOpen) {
-        toggleFilters();
-      } else {
-        clearAllFilters();
-      }
-    }
-  });
-
-  function initializeFiltersFromURL() {
-    const urlParams = new URLSearchParams(window.location.search);
-    let hasFilters = false;
-
-    filterSelects.forEach((select) => {
-      const paramValue = urlParams.get(select.name);
-      if (paramValue) {
-        select.value = paramValue;
-        select.style.color = "#3b3b3b";
-        select.style.fontWeight = "500";
-        hasFilters = true;
-      }
-    });
-
-    if (hasFilters && !isFilterOpen) {
-      setTimeout(() => {
-        toggleFilters();
-      }, 500);
-    }
-
-    if (urlParams.toString()) {
-      applyFilters();
-    }
-  }
-
-  initializeFiltersFromURL();
-
-  function updateFilterButton() {
-    const activeFilters = Array.from(filterSelects).filter(
-      (select) => select.value
-    );
-
-    if (activeFilters.length > 0) {
-      filterButton.classList.add("has-active-filters");
-      filterButton.style.position = "relative";
-    } else {
-      filterButton.classList.remove("has-active-filters");
-      const badge = filterButton.querySelector(".filter-badge");
-      if (badge) {
-        badge.remove();
-      }
-    }
-  }
-
-  filterSelects.forEach((select) => {
-    select.addEventListener("change", updateFilterButton);
-  });
-
-  updateFilterButton();
+  startAutoplay();
+  activateBox(boxes[0]);
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  window.downloadFile = function (filename) {
-    console.log("Downloading file:", filename);
-
-    const link = document.createElement("a");
-    link.href = `/downloads/${filename}`;
-    link.download = filename;
-    link.target = "_blank";
-
-    const downloadBtn = event.target.closest(".download-btn");
-    if (downloadBtn) {
-      const originalContent = downloadBtn.innerHTML;
-      downloadBtn.innerHTML = `
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2"/>
-          <path d="M10 6v4M10 14h.01" stroke="currentColor" stroke-width="2"/>
-        </svg>
-      `;
-      downloadBtn.style.background = "#22c55e";
-      downloadBtn.style.borderColor = "#22c55e";
-
-      setTimeout(() => {
-        downloadBtn.innerHTML = originalContent;
-        downloadBtn.style.background = "";
-        downloadBtn.style.borderColor = "";
-      }, 2000);
-    }
-
-    try {
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch (error) {
-      console.error("Erro ao fazer download:", error);
-      alert("Erro ao fazer download do arquivo. Tente novamente.");
-    }
-  };
-
-  const accordionElement = document.getElementById("estatutosAccordion");
-
-  if (accordionElement) {
-    accordionElement.addEventListener("show.bs.collapse", function (event) {
-      const targetCollapse = event.target;
-      const targetButton = document.querySelector(
-        `[data-bs-target="#${targetCollapse.id}"]`
-      );
-
-      const allCollapses = accordionElement.querySelectorAll(
-        ".accordion-collapse"
-      );
-      allCollapses.forEach((collapse) => {
-        if (
-          collapse !== targetCollapse &&
-          collapse.classList.contains("show")
-        ) {
-          const collapseInstance = bootstrap.Collapse.getInstance(collapse);
-          if (collapseInstance) {
-            collapseInstance.hide();
-          }
-        }
+  const backToTopBtn = document.querySelector(".back-to-top");
+  
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
       });
-
-      if (targetButton) {
-        targetButton.classList.remove("collapsed");
-      }
-    });
-
-    accordionElement.addEventListener("shown.bs.collapse", function (event) {
-      const targetCollapse = event.target;
-      const targetButton = document.querySelector(
-        `[data-bs-target="#${targetCollapse.id}"]`
-      );
-
-      if (targetButton) {
-        targetButton.setAttribute("aria-expanded", "true");
-
-        setTimeout(() => {
-          targetCollapse.scrollIntoView({
-            behavior: "smooth",
-            block: "nearest",
-          });
-        }, 300);
-      }
-    });
-
-    accordionElement.addEventListener("hidden.bs.collapse", function (event) {
-      const targetCollapse = event.target;
-      const targetButton = document.querySelector(
-        `[data-bs-target="#${targetCollapse.id}"]`
-      );
-
-      if (targetButton) {
-        targetButton.classList.add("collapsed");
-        targetButton.setAttribute("aria-expanded", "false");
-      }
     });
   }
 });
+
+let atuacaoSwiper = null;
+
+function initAtuacaoSwiper() {
+  const swiperElement = document.querySelector(".atuacao-swiper");
+  
+  if (!swiperElement) return;
+
+  if (window.innerWidth <= 1199) {
+    if (!atuacaoSwiper) {
+      atuacaoSwiper = new Swiper(".atuacao-swiper", {
+        slidesPerView: 1,
+        spaceBetween: 16,
+        loop: false,
+        centeredSlides: false,
+        breakpoints: {
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 16,
+          },
+        },
+      });
+    }
+  } else {
+    if (atuacaoSwiper) {
+      atuacaoSwiper.destroy(true, true);
+      atuacaoSwiper = null;
+    }
+  }
+}
+
+document.addEventListener("DOMContentLoaded", initAtuacaoSwiper);
+window.addEventListener("resize", initAtuacaoSwiper);
