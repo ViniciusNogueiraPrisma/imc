@@ -1,47 +1,10 @@
-// Initialize Locomotive Scroll
-let scroll;
-
-function initLocomotiveScroll() {
-  scroll = new LocomotiveScroll({
-    el: document.querySelector('[data-scroll-container]'),
-    smooth: true,
-    multiplier: 1,
-    class: 'is-revealed',
-    scrollbarContainer: false,
-    lerp: 0.1,
-    smartphone: {
-      smooth: true
-    },
-    tablet: {
-      smooth: true
-    }
-  });
-
-  // Update scroll on window resize
-  window.addEventListener('resize', () => {
-    scroll.update();
-  });
-}
-
-// Initialize AOS with Locomotive Scroll integration
 AOS.init({
   duration: 800,
   easing: "ease-in-out",
   once: true,
-  offset: 100,
 });
 
-// Update AOS on Locomotive Scroll update
-if (scroll) {
-  scroll.on('scroll', () => {
-    AOS.refresh();
-  });
-}
-
 document.addEventListener("DOMContentLoaded", function () {
-  // Initialize Locomotive Scroll
-  initLocomotiveScroll();
-  
   let currentFontSize = parseInt(localStorage.getItem("fontLevel")) || 100;
 
   const increaseBtn = document.getElementById("increaseFont");
@@ -376,14 +339,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
   const backToTopBtn = document.querySelector(".back-to-top");
-  
+
   if (backToTopBtn) {
     backToTopBtn.addEventListener("click", function (e) {
       e.preventDefault();
-      
+
       window.scrollTo({
         top: 0,
-        behavior: "smooth"
+        behavior: "smooth",
       });
     });
   }
@@ -393,7 +356,7 @@ let atuacaoSwiper = null;
 
 function initAtuacaoSwiper() {
   const swiperElement = document.querySelector(".atuacao-swiper");
-  
+
   if (!swiperElement) return;
 
   if (window.innerWidth <= 1199) {

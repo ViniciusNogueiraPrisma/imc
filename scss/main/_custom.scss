@@ -1,3 +1,8 @@
+* {
+  scroll-margin-top: 0;
+  scroll-padding-top: 0;
+}
+
 .container {
   @media (min-width: 992px) {
     max-width: 991px;
